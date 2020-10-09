@@ -30,9 +30,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
+var landing = require('./controllers/landing')
 app.use(function(req, res, next) {
-  next(createError(404));
-  console.error('404 error - sending to landing');
+  next(createError(404)); //creates 404 error page
   
 });
 

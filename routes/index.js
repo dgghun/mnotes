@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-let landing = require("../controllers/landing")
-router.get("/", landing.get_landing);
+let landing = require("../controllers/landing")   //Home page
+
+
+router.get("/", landing.get_landing);             //Home page
 
 
 
@@ -14,5 +15,8 @@ router.get('/err', function(req, res, next) {
     error:  {status: 'status test', stack: 'stack test'}
   });
 });
+
+//Catch all MUST BE LAST!
+router.get("*",landing.get_landing_err);
 
 module.exports = router;
