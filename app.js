@@ -8,8 +8,6 @@ var bodyParser =  require('body-parser') //DGG json body parser
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-
-
 var app = express();
 
 // view engine setup
@@ -29,8 +27,8 @@ app.use(bodyParser.json());   //DGG json body parser
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
 // catch 404 and forward to error handler
-var landing = require('./controllers/landing')
 app.use(function(req, res, next) {
   next(createError(404)); //creates 404 error page
   
