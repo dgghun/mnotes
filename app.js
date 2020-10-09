@@ -21,7 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({extended: true}));  //DGG body parser
 app.use(bodyParser.json());   //DGG json body parser
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -29,6 +32,8 @@ app.use('/users', usersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+  console.error('404 error - sending to landing');
+  
 });
 
 // error handler
