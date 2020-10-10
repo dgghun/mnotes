@@ -11,6 +11,11 @@ const app_name = "mnotes"
 
 /**EXPORT FUNCTIONS */
 
+//Return user home page
+exports.get_userHome = (req, res, next) =>{
+    res.render('userHome', getUserHome());
+}
+
 //Return landing page
 exports.get_landing = (req, res, next) =>{
     res.render('index', getLanding());
@@ -39,3 +44,10 @@ function getLanding(){
     
 }
 
+function getUserHome(){
+    var obj = new Object();
+    obj.title = app_name;
+
+    var str = JSON.stringify(obj);
+    return JSON.parse(str);
+}

@@ -5,7 +5,7 @@ let landing = require("../controllers/landing")   //Home page
 
 
 router.get("/", landing.get_landing);             //Home page
-
+router.post("/userHome", landing.get_userHome)    // User home page
 
 
 //DGG test error page
