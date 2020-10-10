@@ -18,5 +18,7 @@ router.get('/err', function(req, res, next) {
 
 //Catch all MUST BE LAST!
 router.get("*",landing.get_landing_err);
+router.post("*",landing.get_landing_err);
+
 
 module.exports = router;

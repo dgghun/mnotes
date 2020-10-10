@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser =  require('body-parser') //DGG json body parser
+var favicon = require('serve-favicon'); //for browser tab icon
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: true}));  //DGG body parser
 app.use(bodyParser.json());   //DGG json body parser
+
+app.use(favicon(__dirname + '/public/images/favicon.ico')); //browser icon
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+
 
 
 app.use('/', indexRouter);

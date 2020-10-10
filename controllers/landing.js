@@ -18,11 +18,10 @@ exports.get_landing = (req, res, next) =>{
 //Return landing page due to 404
 exports.get_landing_err = (req, res, next) =>{
     urlReq = req.originalUrl
-
-    if(urlReq == "/favicon.ico" || urlReq == "favicon.ico")
-        console.log('-->get_landing_err: request for ' + urlReq);
-    else
-        console.error('-->get_landing_err: Path not found ' + urlReq);
+    urlMeth = req.method
+    
+    var errMsg = '-->get_landing_err: No route for ' + urlMeth + ' ' + urlReq
+    console.error(errMsg);
 
     res.render('index',getLanding());
 };
