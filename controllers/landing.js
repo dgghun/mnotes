@@ -5,7 +5,8 @@
  */
 
 var pkjson = require('../package.json')
-const app_name = pkjson.name
+//const app_name = pkjson.name
+const app_name = "mnotes"
 
 
 /**EXPORT FUNCTIONS */

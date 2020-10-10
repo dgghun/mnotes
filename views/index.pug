@@ -1,7 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(action="/" method="post")
-    button(type="submit", class="btn btn-primary") New Note
+  div.container.text-center
+    img(src="images/favicon.ico" width="10%").mx-auto.d-block
+    h1.display-1= title
+    p Let's write some notes.
+    form(action="/" method="post")
+      button(type="submit", class="btn btn-primary") New Note

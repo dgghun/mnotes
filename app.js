@@ -28,6 +28,7 @@ app.use(favicon(__dirname + '/public/images/favicon.ico')); //browser icon
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+app.use('/images', express.static(path.join(__dirname, 'public/images')))
 
 
 
