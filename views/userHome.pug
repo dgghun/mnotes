@@ -1,20 +1,32 @@
 extends layout
 
+//- https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/index.html
+//- https://startbootstrap.com/previews/simple-sidebar/
 block content
-  nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-    a(href="#").navbar-brand Navbar
-      button(type="button", data-toggle="collapse", data-target="#navbarsExampleDefault", aria-controls="navbarsExampleDefault", aria-expanded="false", aria-label="Toggle navigation").navbar-toggler 
-        span.navbar-toggler-icon
-    div(id="navbarsExampleDefault").collapse.navbar-collapse 
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a(href="#").nav-link Home 
-              span.sr-only (current)
-          li.nav-item.dropdown
-              a(href="#" id="dropdown01", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false").nav-link.dropdown-toggle Dropdown
-              div(aria-labelledby="dropdown01").dropdown-menu 
-                  a(href="#").dropdown-item Action
-                  a(href="#").dropdown-item Another action
-                  a(href="#").dropdown-item Something else here
-  div.container
-    h1.display-4 Welcome back.
+  div.d-flex(id="wrapper")            
+    div.bg-light.border-right(id="sidebar-wrapper")
+      div.sidebar-heading Start Bootstrap
+      div.list-group.list-group-flush
+        a.list-group-item.list-group-item-action.bg-light(href="#") Item 1
+        a.list-group-item.list-group-item-action.bg-light(href="#") Item 2
+        a.list-group-item.list-group-item-action.bg-light(href="#") Item 3
+
+    div.container
+      h1.display-4 Welcome back.
+  //-
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+      a(href="#").navbar-brand Navbar
+        button(type="button", data-toggle="collapse", data-target="#navbarsExampleDefault", aria-controls="navbarsExampleDefault", aria-expanded="false", aria-label="Toggle navigation").navbar-toggler 
+          span.navbar-toggler-icon
+      div(id="navbarsExampleDefault").collapse.navbar-collapse 
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a(href="#").nav-link Home 
+                span.sr-only (current)
+            li.nav-item.dropdown
+                a(href="#" id="dropdown01", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false").nav-link.dropdown-toggle Dropdown
+                div(aria-labelledby="dropdown01").dropdown-menu 
+                    a(href="#").dropdown-item Action
+                    a(href="#").dropdown-item Another action
+                    a(href="#").dropdown-item Something else here
+  
