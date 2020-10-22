@@ -1,56 +1,30 @@
 extends layout
 
 block content
-  div.wrapper
-    //- side bar
-    nav(id="sidebar")
-      div.sidebar-header
-        h3 Bootstrap Sidebar
-      
-      ul.list-unstyled.components
-        p Dummy Heading
-        li.active
-          a(href="#homeSubmenu" data-toggle="collapse" aria-expanded="false").dropdown-toggle Home
-          ul.collapse.list-unstyled(id="homeSubmenu")
-            li
-              a(href="#") Home 1
-            li
-              a(href="#") Home 2
-            li
-              a(href="#") Home 3
-        li
-          a(href="#") About
-        li
-          a(href="#pageSubmenu" data-toggle="collapse" aria-expanded="false").dropdown-toggle Pages
-          ul.collapse.list-unstyled(id="pageSubmenu")
-            li
-              a(href="#") Page 1
-            li
-              a(href="#") Page 2
-            li
-              a(href="#") Page 3
-        li
-          a(href="#") Portfolio
-        li
-          a(href="#") Contact
-
-    //- page content
-    div(id="content")
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        div.container-fluid
-          button(type="button" id="sidebarCollapse").btn.btn-info
-                i.fas.fa-align-left
-                span Toggle Sidebar
-
+  //- https://www.w3schools.com/howto/howto_js_sidenav.asp
+  
+  //- Side bar
+  div.sidenav(id='userHomeSidenav')
+    a.closebtn(href="javascript:void(0)" onclick="closeNav()") &times;
+    a(href='#') About
+    a(href='#') Services
+    a(href='#') Clients
+    a(href='#') Contact
+  //- span(style="font-size:30px;cursor:pointer" onclick="openNav()") &#9776;
+  button.btn.btn-warning(type="button" onclick="openNav()")
+    i.fa.fa-bars  Menu
+  
+  div.container
+    h1.display-4 Welcome back
   script.
-    $(document).ready(function () {
+    function openNav(){
+      document.getElementById("userHomeSidenav").style.width = "250px";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
 
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-    });
-
-    });
-      //- div.container
-        h1.display-4 Welcome back.
+    function closeNav() {
+      document.getElementById("userHomeSidenav").style.width = "0";
+      document.body.style.backgroundColor = "white";
+    }
 
   

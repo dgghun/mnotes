@@ -27,6 +27,8 @@ app.use(bodyParser.json());   //DGG json body parser
 app.use(favicon(__dirname + '/public/images/favicon.ico')); //browser icon
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/popper.js/dist')))
+app.use('/css', express.static(path.join(__dirname, 'node_modules/font-awesome/css')))
+app.use('/fonts', express.static(path.join(__dirname, 'node_modules/font-awesome/fonts')))
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 app.use('/images', express.static(path.join(__dirname, 'public/images')))
