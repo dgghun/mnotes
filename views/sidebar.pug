@@ -1,0 +1,24 @@
+//- Side bar
+div.sidenav(id='userHomeSidenav')
+  //- a.closebtn(href="javascript:void(0)" onclick="closeNav()") &times;
+  a.btn.closebtn.text-light(href="javascript:void(0)" onclick="closeNav()")
+    i.fa.fa-arrow-left
+    //- i.fa.fa-window-close
+  a.btn.btn-primary.mb-2.mx-1.nowrap.text-left(href='#') 
+    i.fa.fa-home
+      span.fa-icon-text  Home
+  a.btn.btn-info.mb-2.mx-1.nowrap.text-left(href='#')
+    i.fa.fa-cog
+      span.fa-icon-text  Settings
+  a.btn.btn-danger.mb-2.mx-1.nowrap.text-left(href='/')
+    i.fa.fa-sign-out
+      span.fa-icon-text  Sign Out
+
+//- Body, side bar button
+button.btn.btn-warning(type="button" onclick="openNav()")
+  i.fa.fa-bars
+    span.fa-icon-text  Menu
+
+append head
+    //- side bar script functions
+    script(src="/javascripts/sidebar.js")    

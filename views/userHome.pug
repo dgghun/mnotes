@@ -3,41 +3,14 @@ extends layout
 block content
   //- https://www.w3schools.com/howto/howto_js_sidenav.asp
   
-  //- Side bar
-  div.sidenav(id='userHomeSidenav')
-    //- a.closebtn(href="javascript:void(0)" onclick="closeNav()") &times;
-    a.closebtn.text-white(href="javascript:void(0)" onclick="closeNav()")
-      i.fa.fa-window-close
-    a.btn.btn-primary.mb-2.mx-1.nowrap.text-left(href='#') 
-      i.fa.fa-pencil
-        span.fa-icon-text  New Note
-    a.btn.btn-info.mb-2.mx-1.nowrap.text-left(href='#')
-      i.fa.fa-cog
-        span.fa-icon-text  Settings
-    a.btn.btn-danger.mb-2.mx-1.nowrap.text-left(href='#')
-      i.fa.fa-sign-out
-        span.fa-icon-text  Sign Out
-  
-  //- Body, side bar button
-  button.btn.btn-warning(type="button" onclick="openNav()")
-    i.fa.fa-bars
-      span.fa-icon-text  Menu
+  //- sidebar.pug
+  include sidebar
   
   //- Body
-  div.container
+  div.container.w3-animate-opacity
     h1.display-3= message
     a.btn.btn-primary(type='button' role='button' href="#") 
-      i.fa.fa-pencil
+      i.fa.fa-plus
         span.fa-icon-text  New Note
-  script.
-    function openNav(){
-      document.getElementById("userHomeSidenav").style.width = "250px";
-      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    }
-
-    function closeNav() {
-      document.getElementById("userHomeSidenav").style.width = "0";
-      document.body.style.backgroundColor = "white";
-    }
-
+  
   
