@@ -5,17 +5,30 @@ block content
   
   //- Side bar
   div.sidenav(id='userHomeSidenav')
-    a.closebtn(href="javascript:void(0)" onclick="closeNav()") &times;
-    a(href='#') About
-    a(href='#') Services
-    a(href='#') Clients
-    a(href='#') Contact
-  //- span(style="font-size:30px;cursor:pointer" onclick="openNav()") &#9776;
-  button.btn.btn-warning(type="button" onclick="openNav()")
-    i.fa.fa-bars  Menu
+    //- a.closebtn(href="javascript:void(0)" onclick="closeNav()") &times;
+    a.closebtn.text-white(href="javascript:void(0)" onclick="closeNav()")
+      i.fa.fa-window-close
+    a.btn.btn-primary.mb-2.mx-1.nowrap.text-left(href='#') 
+      i.fa.fa-pencil
+        span.fa-icon-text  New Note
+    a.btn.btn-info.mb-2.mx-1.nowrap.text-left(href='#')
+      i.fa.fa-cog
+        span.fa-icon-text  Settings
+    a.btn.btn-danger.mb-2.mx-1.nowrap.text-left(href='#')
+      i.fa.fa-sign-out
+        span.fa-icon-text  Sign Out
   
+  //- Body, side bar button
+  button.btn.btn-warning(type="button" onclick="openNav()")
+    i.fa.fa-bars
+      span.fa-icon-text  Menu
+  
+  //- Body
   div.container
-    h1.display-4= message
+    h1.display-3= message
+    a.btn.btn-primary(type='button' role='button' href="#") 
+      i.fa.fa-pencil
+        span.fa-icon-text  New Note
   script.
     function openNav(){
       document.getElementById("userHomeSidenav").style.width = "250px";
