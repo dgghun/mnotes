@@ -6,14 +6,16 @@
 
 var pkjson = require('../package.json')
 //const app_name = pkjson.name
-const app_name = "mnotes"
+const app_name = "mnotes" 
 
 
 /**EXPORT FUNCTIONS */
 
 //Return user home page
 exports.get_userHome = (req, res, next) =>{
-    res.render('userHome', getUserHome());
+    var message = req.body.message
+    console.log("-->landing.js:get_userHome: message = " + message)
+    res.render('userHome', getUserHome(message));
 }
 
 //Return landing page
@@ -44,9 +46,13 @@ function getLanding(){
     
 }
 
-function getUserHome(){
+function getUserHome(msg){
     var obj = new Object();
     obj.title = app_name;
+ 
+    obj.message = msg;
+    if(msg == 'login')                  //new login?
+        obj.message = "Welcome Back";   //yup, set welcome message
 
     var str = JSON.stringify(obj);
     return JSON.parse(str);

@@ -5,5 +5,7 @@ block content
     img(src="images/favicon.ico" width="10%").mx-auto.d-block
     h1.display-1= title
     p Let's write some notes.
-    form(action="/userHome" method="post")
+    form(role='form' action="/userHome" method="POST")
+      //- TODO testing, temporary until login credentials in place
+      input(type="hidden",id="message", name="message", value="login")
       button(type="submit", class="btn btn-primary") Login
