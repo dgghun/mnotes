@@ -8,21 +8,47 @@ block content
   //- Body
   div.container.w3-animate-opacity
     h1.display-3= message
+    
+    //- Form start
     hr
     form
       div.form-row
         div.form-group.col-md
           label(for='firstName') First Name
-          input(type='text' id='firstName' placeholder='First Name').form-control.toupper
+          input(required type='text' id='firstName' name='firstName' placeholder='First Name').form-control.toupper
         div.form-group.col-md
           label(for='lastName') Last Name
-          input(type='text' id='lastName' placeholder='Last Name').form-control.toupper
+          input(required type='text' id='lastName' name='lastName' placeholder='Last Name').form-control.toupper
         div.form-group.col-md
           label(for='middleName') Middle Name
-          input(type='text' id='middleName' placeholder='Middle Name').form-control.toupper
+          input(type='text' id='middleName' name='middleName' placeholder='Middle Name').form-control.toupper
       div.form-group
         label(for='address1') Address 1
-        input(type='text' id='address1' placeholder='1234 Some St').form-control.toupper
+        input(type='text' id='address1' name='address1' placeholder='1234 Some St').form-control.toupper
       div.form-group
         label(for='address2') Address 2
-        input(type='text' id='address2' placeholder='Apt, Suite, floor').form-control.toupper
+        input(type='text' id='address2' name='address2' placeholder='Apt, Suite, floor').form-control.toupper
+      div.form-row
+        div.form-group.col-md-6
+          label(for='city') City
+          input(type='text' id='city' name='city' placeholder='City').form-control.toupper
+        div.form-group.col-md-2
+          label(for='state') State
+          select(id='state' name='zip').form-control.toupper
+            include stateslist
+        div.form-group.col-md-4
+          label(for='zip') Zip
+          input(type='text' id='zip' name='zip' placeholder='Zip').form-control.toupper
+      div.form-row
+        div.form-group.col-md-3
+          label(for='phone') Phone
+          input(type='tel' id='phone' name='id' placeholder='555-555-5555' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}').form-control.toupper
+          small.text-muted Format: 555-555-5555
+        
+        div.form-group.col-md-5
+          label(for='email') Email
+          input(type='email' id='email' name='email' placeholder="email@email.com").form-control
+      button(type='submit').btn.btn-primary 
+        i.fa.fa-plus
+          span.fa-icon-text  Save Client
+    hr
