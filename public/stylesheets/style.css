@@ -14,7 +14,6 @@ body {
   /* color: #00B7FF; */
 /* } */
 
-/* userHome.pug */
 .sidenav {
   height: 100%;
   width: 0;
@@ -55,5 +54,6 @@ body {
   .sidenav a {font-size: 18px;}
 }
 
-
-/* END userHome.pug */
+.toupper {
+  text-transform: uppercase; 
+}

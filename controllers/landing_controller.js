@@ -14,6 +14,10 @@ const app_name = "mnotes"
 //Return user home page
 exports.get_userHome = (req, res, next) =>{
     var message = req.body.message
+
+    if(typeof message === 'undefined' | message === '')
+        message = "Let's write some notes."
+
     console.log("-->landing.js:get_userHome: message = " + message)
     res.render('userHome', getUserHome(message));
 }

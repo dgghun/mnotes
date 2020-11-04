@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  //- sidebar.pug
+  include sidebar
+
+  //- Body
+  div.container.w3-animate-opacity
+    h1.display-3= message
+    hr
+    form
+      div.form-row
+        div.form-group.col-md
+          label(for='firstName') First Name
+          input(type='text' id='firstName' placeholder='First Name').form-control.toupper
+        div.form-group.col-md
+          label(for='lastName') Last Name
+          input(type='text' id='lastName' placeholder='Last Name').form-control.toupper
+        div.form-group.col-md
+          label(for='middleName') Middle Name
+          input(type='text' id='middleName' placeholder='Middle Name').form-control.toupper
+      div.form-group
+        label(for='address1') Address 1
+        input(type='text' id='address1' placeholder='1234 Some St').form-control.toupper
+      div.form-group
+        label(for='address2') Address 2
+        input(type='text' id='address2' placeholder='Apt, Suite, floor').form-control.toupper

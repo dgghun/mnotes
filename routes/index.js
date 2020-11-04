@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-let landing = require("../controllers/landing")   //Home page
-
+let landing = require("../controllers/landing_controller")   //Home page
+let userHome = require("../controllers/notes_controller")    //notes
 
 router.get("/", landing.get_landing);             //Home page
 router.post("/userHome", landing.get_userHome)    // User home page
+router.get("/userHome", landing.get_userHome)    // User home page
+router.get("/newClient",userHome.get_newClient)
 
 
 //DGG test error page
