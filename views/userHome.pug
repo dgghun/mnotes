@@ -8,6 +8,18 @@ block content
   
   //- Body
   div.container.w3-animate-opacity
+
+    //- Check for alerts
+    if doAlert
+      div.alert.alert-primary(role="alert" id='alert') #{alertMsg}
+      script.
+        window.setTimeout(function() {
+          $(".alert").fadeTo(500, 0).slideUp(500, function(){
+              $(this).remove(); 
+          });
+        }, 2000);
+      
+
     h1.display-3= message
     a.btn.btn-primary(type='button' role='button' href="/newClient") 
       i.fa.fa-plus

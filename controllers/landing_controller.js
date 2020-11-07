@@ -5,21 +5,24 @@
  */
 
 var pkjson = require('../package.json')
+const { head } = require('../routes')
 //const app_name = pkjson.name
 const app_name = "mnotes" 
-
+const header = "Let's write some notes."
 
 /**EXPORT FUNCTIONS */
 
 //Return user home page
 exports.get_userHome = (req, res, next) =>{
     var message = req.body.message
-
-    if(typeof message === 'undefined' | message === '')
-        message = "Let's write some notes."
-
+    
+    
+    if(isNull(message))
+        message = header
+    
     console.log("-->landing.js:get_userHome: message = " + message)
-    res.render('userHome', getUserHome(message));
+    console.log(req.body)
+    res.render('userHome', getUserHome(message, req));
 }
 
 //Return landing page
@@ -50,14 +53,30 @@ function getLanding(){
     
 }
 
-function getUserHome(msg){
+function getUserHome(msg, req){
     var obj = new Object();
     obj.title = app_name;
  
     obj.message = msg;
+    obj.doAlert = false;
+    
     if(msg == 'login')                  //new login?
         obj.message = "Welcome Back";   //yup, set welcome message
 
+    if(msg == 'clientAdded'){
+        var newClient = req.body.client;
+        obj.message = header;
+        obj.doAlert = true;
+        obj.alertMsg = 'Added client ' +  newClient 
+
+    }
+
     var str = JSON.stringify(obj);
     return JSON.parse(str);
+}
+
+function isNull(str){
+    if(typeof str === 'undefined' | str === '')
+        return true
+    return false
 }
