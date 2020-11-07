@@ -16,7 +16,6 @@ const header = "Let's write some notes."
 exports.get_userHome = (req, res, next) =>{
     var message = req.body.message
     
-    
     if(isNull(message))
         message = header
     
@@ -57,16 +56,18 @@ function getUserHome(msg, req){
     var obj = new Object();
     obj.title = app_name;
  
-    obj.message = msg;
-    obj.doAlert = false;
+    obj.message = msg;                  // preset default message
+    obj.doAlert = false;                // preset to no alert
     
     if(msg == 'login')                  //new login?
         obj.message = "Welcome Back";   //yup, set welcome message
 
+    // client added to db?
     if(msg == 'clientAdded'){
         var newClient = req.body.client;
         obj.message = header;
         obj.doAlert = true;
+        obj.pugMsg = 'clientAdded'
         obj.alertMsg = 'Added client ' +  newClient 
 
     }

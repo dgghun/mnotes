@@ -1,0 +1,10 @@
+if pugMsg == 'clientAdded'
+  div.alert.alert-success.alertstyle(role="alert" id='alert') 
+    i.fa.fa-exclamation-circle.fa-lg 
+      span.fa-icon-text   #{alertMsg}
+  script.
+    window.setTimeout(function() {
+      $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove(); 
+      });
+    }, 3000);
