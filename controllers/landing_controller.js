@@ -58,11 +58,12 @@ function getUserHome(msg, req){
     obj.title = app_name;
  
     obj.message = msg;
-    obj.doAlert = false;
+    obj.doAlert = false;                //alert popup default is off
     
     if(msg == 'login')                  //new login?
         obj.message = "Welcome Back";   //yup, set welcome message
 
+    // Client is added to db
     if(msg == 'clientAdded'){
         var newClient = req.body.client;
         obj.message = header;

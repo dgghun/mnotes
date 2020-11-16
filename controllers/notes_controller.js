@@ -23,7 +23,7 @@ const fname = "-->notes_controller.js:"    // file name for logging
       message: 'clientAdded',
       client: fullName
    }
-
+   
    landing.get_userHome(req, res, next)
  }
 
