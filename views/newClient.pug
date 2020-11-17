@@ -47,7 +47,6 @@ block content
         div.form-group.col-md-3
           label(for='phone') Phone
           input(type='tel' id='phone' name='id' placeholder='555-555-5555' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}').form-control.toupper
-          small.text-muted Format: 555-555-5555
         
         div.form-group.col-md-5
           label(for='email') Email
@@ -56,5 +55,11 @@ block content
         i.fa.fa-plus
           span.fa-icon-text  Save Client
     hr
+<<<<<<< HEAD
     script.
       document.getElementById('date').valueAsDate = new Date(); //set date input to current
+=======
+    append foot
+      script.
+        checkPhone()
+>>>>>>> 06f229f64765d411190bcd3ba23805a8aa5444da
