@@ -12,6 +12,10 @@ block content
     //- Form start
     hr
     form(role='form' method="POST" action="/createNewClient")
+      //- div.form-row
+        div.form-group.col-md
+          label(for='date') Date
+          input(required type="date" id="date").form-control
       div.form-row
         div.form-group.col-md
           label(for='firstName') First Name
@@ -52,3 +56,5 @@ block content
         i.fa.fa-plus
           span.fa-icon-text  Save Client
     hr
+    script.
+      document.getElementById('date').valueAsDate = new Date(); //set date input to current
