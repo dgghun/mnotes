@@ -56,22 +56,13 @@ function getUserHome(msg, req){
     var obj = new Object();
     obj.title = app_name;
  
-<<<<<<< HEAD
-    obj.message = msg;
-    obj.doAlert = false;                //alert popup default is off
-=======
     obj.message = msg;                  // preset default message
     obj.doAlert = false;                // preset to no alert
->>>>>>> 06f229f64765d411190bcd3ba23805a8aa5444da
     
     if(msg == 'login')                  //new login?
         obj.message = "Welcome Back";   //yup, set welcome message
 
-<<<<<<< HEAD
-    // Client is added to db
-=======
     // client added to db?
->>>>>>> 06f229f64765d411190bcd3ba23805a8aa5444da
     if(msg == 'clientAdded'){
         var newClient = req.body.client;
         obj.message = header;
