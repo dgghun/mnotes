@@ -20,7 +20,7 @@ exports.get_userHome = (req, res, next) =>{
         message = header
     
     console.log("-->landing.js:get_userHome: message = " + message)
-    console.log(req.body)
+    console.log(req.session)
     res.render('userHome', getUserHome(message, req));
 }
 
