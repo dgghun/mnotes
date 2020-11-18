@@ -9,6 +9,7 @@ const { head } = require('../routes')
 //const app_name = pkjson.name
 const app_name = "mnotes" 
 const header = "Let's write some notes."
+const fname = "-->landing_controller.js:"
 
 /**EXPORT FUNCTIONS */
 
@@ -19,8 +20,8 @@ exports.get_userHome = (req, res, next) =>{
     if(isNull(message))
         message = header
     
-    console.log("-->landing.js:get_userHome: message = " + message)
-    console.log(req.session)
+    console.log(fname + "get_userHome: message = " + message)
+    
     res.render('userHome', getUserHome(message, req));
 }
 
