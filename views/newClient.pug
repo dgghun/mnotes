@@ -38,7 +38,7 @@ block content
           input(type='text' id='city' name='city' placeholder='City').form-control.toupper
         div.form-group.col-md-2
           label(for='state') State
-          select(id='state' name='zip').form-control.toupper
+          select(id='state' name='state').form-control.toupper
             include stateslist
         div.form-group.col-md-4
           label(for='zip') Zip
@@ -47,10 +47,22 @@ block content
         div.form-group.col-md-3
           label(for='phone') Phone
           input(type='tel' id='phone' name='id' placeholder='555-555-5555' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}').form-control.toupper
-        
         div.form-group.col-md-5
           label(for='email') Email
           input(type='email' id='email' name='email' placeholder="email@email.com").form-control
+      div.form-row
+        div.form-group.col-md-3
+          label(for='ethnicity') Ethnicity
+          input(type='text' id='ethnicity' name='ethnicity' placeholder='Ethnicity').form-control.toupper
+        div.form-group.col-md-3
+          label(for='marital_status') Marital Status
+          select(id='marital_status' name='marital_status').form-control.toupper
+            option(value="" selected) --Marital Status--
+            option(value="Single") Single
+            option(value="Married") Married
+            option(value="Widowed") Widowed
+            option(value="Separated") Separated
+            option(value="Divorced") Divorced
       button(type='submit').btn.btn-primary 
         i.fa.fa-plus
           span.fa-icon-text  Save Client
