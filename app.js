@@ -6,6 +6,7 @@ var session = require('express-session')
 var logger = require('morgan');
 var bodyParser =  require('body-parser') //DGG json body parser
 var favicon = require('serve-favicon'); //for browser tab icon
+var sqlite3 = require('sqlite3').verbose(); 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -40,10 +41,17 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/
 app.use('/images', express.static(path.join(__dirname, 'public/images')))
 
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//Connect to sqlite db
+const dbName = path.join(__dirname,"data","mnotes.db");
+const db = new sqlite3.Database(dbName, err =>{
+  if(err)
+    return console.error(err.message)
+
+  console.log("Successful connection to db: " + dbName);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
