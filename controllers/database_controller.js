@@ -8,6 +8,7 @@ const { table } = require('console');
 const { resolve } = require('path');
 var path = require('path');
 var sqlite3 = require('sqlite3').verbose(); 
+var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
 const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
@@ -24,7 +25,7 @@ const CLNT_INIT = "(" +
                   "phone VARCHAR(100)," +
                   "email VARCHAR(100)," +
                   "ethnicity VARCHAR(100)," +
-                  "marital_status VARCHAR(100)" +
+                  "maritalStatus VARCHAR(100)" +
                   ");";
 
 
@@ -49,12 +50,15 @@ exports.getDAO = () => {
     }); //promise end
 }
 
+/**
+ * Initialize the database on startup (make sure things are working)
+ */
 exports.initDB = () => {
     this.getDAO().then(db => {
         
         //Do these sequentially 
         db.serialize(function() {
-            // For testing, starting with fresh tables
+            // For testing
             dropTable(db,CLNT_TABLE);
             dropTable(db,NOTE_TABLE);
 
@@ -64,8 +68,30 @@ exports.initDB = () => {
     }).catch(err => console.error(err))
 }
 
+
+exports.createClient = (newClient) => {
+    
+    console.log(fname + "createClient(): creating client ")
+    var clientRow = "";
+    var clientValues = "";
+    for(var key in newClient){
+        clientRow = clientRow + key + ",";
+        clientValues = clientValues + newClient[key] + ",";
+        // console.log(key,newClient[key])
+    }
+    console.log(clientRow)
+    console.log(clientValues)
+}
+
+
+/**
+ * create a table in db
+ * @param {*} db - SQLite db
+ * @param {*} tableName - table name
+ * @param {*} tableQuery  - SQLite query string
+ */
 function createTable(db,tableName, tableQuery){
-    const querystr = "CREATE TABLE IF NOT EXISTS " + 
+    const querystr = "CREATE TABLE " + 
                      tableName + tableQuery;
     db.run(querystr, err => {
         if (err) {
@@ -75,6 +101,7 @@ function createTable(db,tableName, tableQuery){
         console.log("Successful creation of the "+ CLNT_TABLE +" table");
     });
 }
+
 
 /**
  * Closes database DAO
@@ -107,7 +134,7 @@ function dropTable(db,table) {
                 // reject(err)
                 return
             }
-            console.log("Successful dropped table: " + table);
+            console.log("Successfully dropped table: " + table);
             // resolve(db)
             return
           });

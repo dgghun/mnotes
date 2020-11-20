@@ -19,5 +19,5 @@ name='zip'
 name='phone'
 name='email'
 name='ethnicity'
-name='marital_status'
+name='maritalStatus'
 

@@ -4,6 +4,7 @@
  * Description: Handles note/client creation and modifications
  */
 let landing = require("../controllers/landing_controller")
+let database = require("../controllers/database_controller")
 
 const app_name = "mnotes" 
 const fname = "-->notes_controller.js:"    // file name for logging
@@ -31,6 +32,7 @@ const fname = "-->notes_controller.js:"    // file name for logging
  exports.createNewClient = (req, res, next) => {
    var fullName = req.body.firstName + " " + req.body.lastName
 
+   database.createClient(req.body)
    
    console.log(fname + "createNewClient() added '" + fullName + "'")
    req.body = {
