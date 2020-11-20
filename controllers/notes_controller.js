@@ -1,5 +1,5 @@
 /**
- * File: notes.js
+ * File: notes_controller.js
  * Type: Controller
  * Description: Handles note/client creation and modifications
  */

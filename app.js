@@ -7,6 +7,7 @@ var logger = require('morgan');
 var bodyParser =  require('body-parser') //DGG json body parser
 var favicon = require('serve-favicon'); //for browser tab icon
 var sqlite3 = require('sqlite3').verbose(); 
+let dbController = require('./controllers/database_controller') //db controller
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -45,13 +46,36 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //Connect to sqlite db
-const dbName = path.join(__dirname,"data","mnotes.db");
-const db = new sqlite3.Database(dbName, err =>{
-  if(err)
-    return console.error(err.message)
+const dbName = path.join(__dirname, "data", "mnotes.db");
+dbController.connectToDb(dbName)
+.then(db => {
+    dbController.dropTable(db,'Books')
+    .then(db => {
+      const sql_create = `CREATE TABLE IF NOT EXISTS Books (
+      Book_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+      Title VARCHAR(100) NOT NULL,
+      Author VARCHAR(100) NOT NULL,
+      Comments TEXT
+      );`;
+    
+      db.run(sql_create, err => {
+        if (err) {
+          return console.error(err.message);
+        }
+        console.log("Successful creation of the 'Books' table");
+      });
+    })
+    .catch(err => console.log(err))
+})
+.catch(err => console.log(err))
 
-  console.log("Successful connection to db: " + dbName);
-});
+// const dbName = path.join(__dirname,"data","mnotes.db");
+// const db = new sqlite3.Database(dbName, err =>{
+//   if(err)
+//     return console.error(err.message)
+
+//   console.log("Successful connection to db: " + dbName);
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

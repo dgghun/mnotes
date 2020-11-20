@@ -1,5 +1,5 @@
 /**
- * File: landing.js
+ * File: landing_controller.js
  * Type: Controller
  * Description: Handles landing page calls
  */
