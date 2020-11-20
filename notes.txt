@@ -1,3 +1,23 @@
 #SQLite info
 https://blog.pagesd.info/2019/10/08/crud-with-express-sqlite-10-steps/#crud6
 https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
+
+#...................
+# mnotes database
+#..................
+
+-CLIENT TABLE
+grep "^[[:space:]]*input\|^[[:space:]]*select" views/newClient.pug | grep -Eo "(name=)'([^']*)'"
+name='firstName'
+name='lastName'
+name='middleName'
+name='address1'
+name='address2'
+name='city'
+name='state'
+name='zip'
+name='phone'
+name='email'
+name='ethnicity'
+name='marital_status'
+

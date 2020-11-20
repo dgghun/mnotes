@@ -45,29 +45,27 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-//Connect to sqlite db
-const dbName = path.join(__dirname, "data", "mnotes.db");
-dbController.connectToDb(dbName)
-.then(db => {
-    dbController.dropTable(db,'Books')
-    .then(db => {
-      const sql_create = `CREATE TABLE IF NOT EXISTS Books (
-      Book_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-      Title VARCHAR(100) NOT NULL,
-      Author VARCHAR(100) NOT NULL,
-      Comments TEXT
-      );`;
+//Test connection to sqlite databases
+dbController.initDB()
+
+
+    // dbController.dropTable(db,'Books')
+    // .then(db => {
+    //   const sql_create = `CREATE TABLE IF NOT EXISTS Books (
+    //   Book_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    //   Title VARCHAR(100) NOT NULL,
+    //   Author VARCHAR(100) NOT NULL,
+    //   Comments TEXT
+    //   );`;
     
-      db.run(sql_create, err => {
-        if (err) {
-          return console.error(err.message);
-        }
-        console.log("Successful creation of the 'Books' table");
-      });
-    })
-    .catch(err => console.log(err))
-})
-.catch(err => console.log(err))
+    //   db.run(sql_create, err => {
+    //     if (err) {
+    //       return console.error(err.message);
+    //     }
+    //     console.log("Successful creation of the 'Books' table");
+    //   });
+    // })
+    // .catch(err => console.log(err))
 
 // const dbName = path.join(__dirname,"data","mnotes.db");
 // const db = new sqlite3.Database(dbName, err =>{
