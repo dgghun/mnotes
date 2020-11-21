@@ -12,6 +12,7 @@ var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
 const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
+const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus"
 const CLNT_INIT = "(" +
                   "ClientId INTEGER PRIMARY KEY AUTOINCREMENT," +
                   "firstName VARCHAR(100) NOT NULL," +
@@ -72,15 +73,31 @@ exports.initDB = () => {
 exports.createClient = (newClient) => {
     
     console.log(fname + "createClient(): creating client ")
-    var clientRow = "";
     var clientValues = "";
-    for(var key in newClient){
-        clientRow = clientRow + key + ",";
-        clientValues = clientValues + newClient[key] + ",";
-        // console.log(key,newClient[key])
-    }
-    console.log(clientRow)
-    console.log(clientValues)
+    for(var key in newClient)
+        clientValues = clientValues + "'" + newClient[key] + "',";
+    
+    clientValues = clientValues.substring(0,clientValues.length - 1)        
+    var querystr = "INSERT INTO " + CLNT_TABLE + 
+    "(" + CLNT_ROW + ")" +
+    " VALUES (" + clientValues + ");"
+    
+    return new Promise((resolve,reject) => {
+        this.getDAO().then(db => {
+            db.serialize(function(){
+                db.run(querystr, err =>{
+                    if(err){
+                        console.log(err.message)
+                        reject(err)
+                    } else{
+                        console.log("Client added successfully")
+                        resolve(err)
+                    }
+                })
+                closeDAO(db);
+            })
+        }).catch(err => console.error(err))
+    })    
 }
 
 

@@ -33,13 +33,16 @@ const fname = "-->notes_controller.js:"    // file name for logging
    var fullName = req.body.firstName + " " + req.body.lastName
 
    database.createClient(req.body)
+   .then(err => {
+      console.log(fname + "createNewClient() added '" + fullName + "'")
+      req.body = {
+         message: 'clientAdded',
+         client: fullName
+      }
+      landing.get_userHome(req, res, next)
+   })
+   .catch(err => console.log(fname + ":" + err))
    
-   console.log(fname + "createNewClient() added '" + fullName + "'")
-   req.body = {
-      message: 'clientAdded',
-      client: fullName
-   }
-   landing.get_userHome(req, res, next)
  }
 
  /**LOCAL FUNCTIONS */
