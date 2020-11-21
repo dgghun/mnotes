@@ -75,22 +75,24 @@ exports.createClient = (newClient) => {
     console.log(fname + "createClient(): creating client ")
     var clientValues = "";
     for(var key in newClient)
-        clientValues = clientValues + "'" + newClient[key] + "',";
-    
-    clientValues = clientValues.substring(0,clientValues.length - 1)        
+        clientValues = clientValues + "'" + newClient[key] + "',";      //append all values into sql string
+        
+    clientValues = clientValues.substring(0,clientValues.length - 1)    //strip last comma in sql string
     var querystr = "INSERT INTO " + CLNT_TABLE + 
     "(" + CLNT_ROW + ")" +
     " VALUES (" + clientValues + ");"
     
     return new Promise((resolve,reject) => {
         this.getDAO().then(db => {
+            
+            //Do this seqeutially 
             db.serialize(function(){
                 db.run(querystr, err =>{
                     if(err){
-                        console.log(err.message)
+                        console.log(fname + err.message)
                         reject(err)
                     } else{
-                        console.log("Client added successfully")
+                        console.log(fname + "Client added successfully")
                         resolve(err)
                     }
                 })
