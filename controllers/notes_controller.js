@@ -32,6 +32,7 @@ const fname = "-->notes_controller.js:"    // file name for logging
  exports.createNewClient = (req, res, next) => {
    var fullName = req.body.firstName + " " + req.body.lastName
 
+   //Create new client in db
    database.createClient(req.body)
    .then(err => {
       console.log(fname + "createNewClient() added '" + fullName + "'")
@@ -41,7 +42,15 @@ const fname = "-->notes_controller.js:"    // file name for logging
       }
       landing.get_userHome(req, res, next)
    })
-   .catch(err => console.log(fname + ":" + err))
+   .catch(err => {
+      console.log(fname + "createNewClient():" + err)
+      req.body = {
+         message: 'clientAddedError',
+         client: fullName,
+         errormessage: err.message
+      }
+      landing.get_userHome(req, res, next)
+   })
    
  }
 

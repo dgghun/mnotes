@@ -1,11 +1,25 @@
+- var doAlert = false
+
 if pugMsg == 'clientAdded'
+  - doAlert = true
   div.alert.alert-success.alertstyle(role="alert" id='alert') 
     i.fa.fa-exclamation-circle.fa-lg 
       span.fa-icon-text   #{alertMsg}
+
+if pugMsg == 'clientAddedError'
+  - doAlert = true
+  div.alert.alert-danger.alertstyle(role="alert" id='alert') 
+    i.fa.fa-exclamation-circle.fa-lg 
+      span.fa-icon-text   #{alertMsg}
+    hr
+    p #{errorMsg}      
+
+if doAlert  
   script.
     window.setTimeout(function() {
       $(".alert").fadeTo(500, 0).slideUp(500, function(){
           $(this).remove(); 
       });
-    }, 3000);
+    }, 5000);
+
 
