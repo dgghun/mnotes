@@ -6,6 +6,7 @@
 
 var pkjson = require('../package.json')
 const { head } = require('../routes')
+let database = require("../controllers/database_controller")
 //const app_name = pkjson.name
 const app_name = "mnotes" 
 const header = "Let's write some notes."
@@ -14,15 +15,22 @@ const fname = "-->landing_controller.js:"
 /**EXPORT FUNCTIONS */
 
 //Return user home page
-exports.get_userHome = (req, res, next) =>{
+exports.get_userHome = (req, res, next) => {
     var message = req.body.message
-    
-    if(isNull(message))
+
+    if (isNull(message))
         message = header
-    
+
     console.log(fname + "get_userHome: message = " + message)
-    
-    res.render('userHome', getUserHome(message, req));
+
+    //Retrieve list of clients from db to display on user landing page
+    database.retrieveClients().then(clients => {
+        res.render('userHome', getUserHome(message, req, clients));
+    }).catch(err => {
+        console.log(err)
+        var clients = null
+        res.render('userHome', getUserHome(message, req, clients));
+    })
 }
 
 //Return landing page
@@ -53,16 +61,17 @@ function getLanding(){
     
 }
 
-function getUserHome(msg, req){
+function getUserHome(msg, req, clnts){
     var obj = new Object();
     obj.title = app_name;
  
     obj.message = msg;                  // preset default message
     obj.doAlert = false;                // preset to no alert
-    
+    obj.clients = clnts;                // list of clients
+ 
     if(msg == 'login')                  //new login?
-        obj.message = "Welcome Back";   //yup, set welcome message
-
+    obj.message = "Welcome Back";   //yup, set welcome message
+    
     // client added to db?
     if(msg == 'clientAdded'){
         var newClient = req.body.client;
@@ -70,7 +79,7 @@ function getUserHome(msg, req){
         obj.doAlert = true;
         obj.pugMsg = 'clientAdded'
         obj.alertMsg = 'Added client ' +  newClient 
-
+        
     }else if(msg == 'clientAddedError'){
         var newClient = req.body.client;
         obj.message = header;
@@ -79,13 +88,14 @@ function getUserHome(msg, req){
         obj.alertMsg = 'Client not added: ' +  newClient 
         obj.errorMsg = req.body.errormessage
     }
-
+    
     var str = JSON.stringify(obj);
+    console.log(typeof clnts)
     return JSON.parse(str);
 }
 
 function isNull(str){
     if(typeof str === 'undefined' | str === '')
-        return true
+    return true
     return false
 }

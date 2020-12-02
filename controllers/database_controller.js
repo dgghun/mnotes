@@ -71,6 +71,33 @@ exports.initDB = () => {
     }).catch(err => console.error(err))
 }
 
+
+exports.retrieveClients = () => {
+    const querystr = "SELECT * FROM " + CLNT_TABLE;
+    return new Promise((resolve, reject) => {
+
+        this.getDAO().then(db => {
+            //Do this sequentially
+            db.serialize(function () {
+                db.all(querystr, [], (err, rows) => {
+                    if (err) {
+                        console.log(fname + "retrieveClients():" + err.message)
+                        console.log(fname + "retrieveClients():" + err)
+                        reject(err)
+                    }
+                    console.log(fname + "retrieveClients(): Clients retrieved successfully")
+                    resolve(rows)
+                })
+                closeDAO(db);
+            })
+        }).catch(err => {
+            console.error(err)
+            console.error(err.message)
+            return err
+        })
+    })
+}
+
 /**
  * Adds a Client to db
  * @param {*} newClient - new client to add to db
@@ -80,10 +107,10 @@ exports.createClient = (newClient) => {
     console.log(fname + "createClient(): creating client ")
     var clientValues = [];
     for(var key in newClient)
-        clientValues.push("'" + newClient[key] + "'")
+        clientValues.push(newClient[key])
         
-    clientValues.push("'" + getDate() + "'")    //add created date
-    clientValues.push("'" + getDate() + "'")    //add updated date
+    clientValues.push(getDate())    //add created date
+    clientValues.push(getDate())    //add created date
     var querystr = "INSERT INTO " + CLNT_TABLE + 
     "(" + CLNT_ROW + ")" +
     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"

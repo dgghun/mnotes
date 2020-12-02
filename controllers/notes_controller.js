@@ -5,6 +5,7 @@
  */
 let landing = require("../controllers/landing_controller")
 let database = require("../controllers/database_controller")
+const { data } = require("jquery")
 
 const app_name = "mnotes" 
 const fname = "-->notes_controller.js:"    // file name for logging
@@ -40,6 +41,7 @@ const fname = "-->notes_controller.js:"    // file name for logging
          message: 'clientAdded',
          client: fullName
       }
+      
       landing.get_userHome(req, res, next)
    })
    .catch(err => {
