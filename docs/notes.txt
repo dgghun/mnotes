@@ -6,10 +6,10 @@ https://github.com/mapbox/node-sqlite3/wiki
 ### TO-DO ###
 ###################################################################################
 -Client CRUD Create #DONE
--Client CRUD Retrieve
+-Client CRUD Retrieve #DONE
 -Client CRUD Update
 -Client CRUD Delete
--List 'Clients' in user landing
+-List 'Clients' in user landing #Working on this
 -Add ability to delete a Client
 -Add ability to edit client info
 -Create Client landing page
