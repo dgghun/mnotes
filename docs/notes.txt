@@ -1,7 +1,7 @@
 #SQLite info
 https://blog.pagesd.info/2019/10/08/crud-with-express-sqlite-10-steps/#crud6
 https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
-
+https://github.com/mapbox/node-sqlite3/wiki
 ###################################################################################
 ### TO-DO ###
 ###################################################################################
