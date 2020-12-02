@@ -12,7 +12,7 @@ var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
 const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
-const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus"
+const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus,dt_created,dt_updated"
 const CLNT_INIT = "(" +
                   "ClientId INTEGER PRIMARY KEY AUTOINCREMENT," +
                   "firstName VARCHAR(100) NOT NULL," +
@@ -26,7 +26,9 @@ const CLNT_INIT = "(" +
                   "phone VARCHAR(100)," +
                   "email VARCHAR(100)," +
                   "ethnicity VARCHAR(100)," +
-                  "maritalStatus VARCHAR(100)" +
+                  "maritalStatus VARCHAR(100)," +
+                  "dt_created TEXT," +
+                  "dt_updated TEXT" +
                   ");";
 
 
@@ -69,7 +71,10 @@ exports.initDB = () => {
     }).catch(err => console.error(err))
 }
 
-
+/**
+ * Adds a Client to db
+ * @param {*} newClient - new client to add to db
+ */
 exports.createClient = (newClient) => {
     
     console.log(fname + "createClient(): creating client ")
@@ -77,9 +82,11 @@ exports.createClient = (newClient) => {
     for(var key in newClient)
         clientValues.push("'" + newClient[key] + "'")
         
+    clientValues.push("'" + getDate() + "'")    //add created date
+    clientValues.push("'" + getDate() + "'")    //add updated date
     var querystr = "INSERT INTO " + CLNT_TABLE + 
     "(" + CLNT_ROW + ")" +
-    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?);"
+    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
     
     return new Promise((resolve,reject) => {
         this.getDAO().then(db => {
@@ -106,6 +113,22 @@ exports.createClient = (newClient) => {
     })    
 }
 
+/**
+ * Returns formatted current date 
+ */
+function getDate(){
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear()
+
+    if(dd < 10)
+        dd = '0' + dd
+    if(mm < 10)
+        mm = '0' + mm
+
+    return mm + "-" + dd + "-" + yyyy
+}
 
 /**
  * create a table in db
