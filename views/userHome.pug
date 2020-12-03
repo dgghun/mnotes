@@ -18,7 +18,20 @@ block content
       i.fa.fa-plus
         span.fa-icon-text  New Client
 
-    ul
-      each key in clients
-        li= "NAME: " + key.firstName + " " + key.lastName + ", UPDATED: " + key.dt_updated
+    //- Display clients if there are some
+    if clients.length > 0
+      div.shadow-sm.my-3.br-white.rounded
+        div.card-body
+          h2.display-4 Clients
+          hr
+          each key in clients
+            div.card.my-2.shadow-sm.rounded
+              div.card-body
+                h5.card-title.tocapitalize #{key.firstName} #{key.lastName}
+
+                
+
+      //- ul
+        each key in clients
+          li= "NAME: " + key.firstName + " " + key.lastName + ", UPDATED: " + key.dt_updated
   

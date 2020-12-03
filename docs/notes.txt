@@ -10,6 +10,7 @@ https://github.com/mapbox/node-sqlite3/wiki
 -Client CRUD Update
 -Client CRUD Delete
 -List 'Clients' in user landing #Working on this
+-Format names camal case for displaying on pages
 -Add ability to delete a Client
 -Add ability to edit client info
 -Create Client landing page
