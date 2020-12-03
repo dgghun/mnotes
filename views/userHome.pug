@@ -27,7 +27,20 @@ block content
           each key in clients
             div.card.my-2.shadow-sm.rounded
               div.card-body
-                h5.card-title.tocapitalize #{key.firstName} #{key.lastName}
+                div.container
+                  div.row.mb-2
+                    div.col-sm-9
+                      h5.card-title.tocapitalize #{key.firstName} #{key.lastName}
+                    div.col-sm-3
+                      a.btn.btn-primary.btn-block(type='button' role='button' href='#')
+                        i.fa.fa-pencil
+                          span.fa-icon-text  New Note
+                  div.row
+                    div.col-sm-9
+                    div.col-sm-3
+                      a.btn.btn-secondary.btn-block(type='button' role='button' href='#')
+                        i.fa.fa-user
+                          span.fa-icon-text  View Client
 
                 
 

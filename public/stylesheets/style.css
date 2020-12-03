@@ -74,3 +74,8 @@ body {
 .textcenter {
   text-align: center;
 }
+
+.uniformbg {
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(240,239,239,1) 50%, rgba(250,250,250,1) 100%);
+}
