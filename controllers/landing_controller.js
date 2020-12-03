@@ -90,7 +90,6 @@ function getUserHome(msg, req, clnts){
     }
     
     var str = JSON.stringify(obj);
-    console.log(typeof clnts)
     return JSON.parse(str);
 }
 

@@ -18,5 +18,7 @@ block content
       i.fa.fa-plus
         span.fa-icon-text  New Client
 
-    h2= clnts  
+    ul
+      each key in clients
+        li= "NAME: " + key.firstName + " " + key.lastName + ", UPDATED: " + key.dt_updated
   
