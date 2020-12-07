@@ -24,27 +24,24 @@ block content
         div.card-body
           h2.display-4 Clients
           hr
-          each key in clients
+          each client in clients
             div.card.my-2.shadow-sm.rounded
               div.card-body
                 div.container
                   div.row.mb-2
                     div.col-sm-9
-                      h5.card-title.tocapitalize #{key.firstName} #{key.lastName}
+                      p.text-muted Last Updated: #{client.dt_updated}  ID: #{client.id} 
                     div.col-sm-3
                       a.btn.btn-primary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-pencil
                           span.fa-icon-text  New Note
                   div.row
                     div.col-sm-9
+                      h5.card-title.tocapitalize #{client.firstName} #{client.lastName}
                     div.col-sm-3
                       a.btn.btn-secondary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-user
                           span.fa-icon-text  View Client
-
                 
 
-      //- ul
-        each key in clients
-          li= "NAME: " + key.firstName + " " + key.lastName + ", UPDATED: " + key.dt_updated
   

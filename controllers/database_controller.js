@@ -14,7 +14,7 @@ const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
 const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus,dt_created,dt_updated"
 const CLNT_INIT = "(" +
-                  "ClientId INTEGER PRIMARY KEY AUTOINCREMENT," +
+                  "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                   "firstName VARCHAR(100) NOT NULL," +
                   "lastName VARCHAR(100) NOT NULL," +
                   "middleName VARCHAR(100)," +
