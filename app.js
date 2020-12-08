@@ -6,6 +6,7 @@ var session = require('express-session')
 var logger = require('morgan');
 var bodyParser =  require('body-parser') //DGG json body parser
 var favicon = require('serve-favicon'); //for browser tab icon
+var moment = require('moment');         //for javascript time operations
 var sqlite3 = require('sqlite3').verbose(); 
 let dbController = require('./controllers/database_controller') //db controller
 

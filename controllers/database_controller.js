@@ -7,6 +7,7 @@ const { rejects } = require('assert');
 const { table } = require('console');
 const { resolve } = require('path');
 var path = require('path');
+var moment = require('moment')
 var sqlite3 = require('sqlite3').verbose(); 
 var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
@@ -72,6 +73,9 @@ exports.initDB = () => {
 }
 
 
+/**
+ * Retrieve Clients
+ */
 exports.retrieveClients = () => {
     const querystr = "SELECT * FROM " + CLNT_TABLE;
     return new Promise((resolve, reject) => {
@@ -86,6 +90,10 @@ exports.retrieveClients = () => {
                         reject(err)
                     }
                     console.log(fname + "retrieveClients(): Clients retrieved successfully")
+                    for(var key in rows){
+                        var dateTime = rows[key].dt_updated
+                        rows[key].dt_updated = moment(dateTime).format('MM/DD/YYYY hh:mm:ss a')
+                    }
                     resolve(rows)
                 })
                 closeDAO(db);
@@ -109,8 +117,9 @@ exports.createClient = (newClient) => {
     for(var key in newClient)
         clientValues.push(newClient[key])
         
-    clientValues.push(getDate())    //add created date
-    clientValues.push(getDate())    //add created date
+    var curDateTime = getDateTime()
+    clientValues.push(curDateTime)    //add created date
+    clientValues.push(curDateTime)    //add created date
     var querystr = "INSERT INTO " + CLNT_TABLE + 
     "(" + CLNT_ROW + ")" +
     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
@@ -140,6 +149,14 @@ exports.createClient = (newClient) => {
     })    
 }
 
+
+/**
+ * get formatted date and time
+ */
+function getDateTime(){
+    return moment().format()
+}
+
 /**
  * Returns formatted current date 
  */
@@ -154,7 +171,19 @@ function getDate(){
     if(mm < 10)
         mm = '0' + mm
 
-    return mm + "-" + dd + "-" + yyyy
+    return yyyy + "-" + mm + "-" + dd
+}
+
+/**
+ * Returns formatted current time 
+ */
+function getTime(){
+    var today = new Date()
+    var hr = today.getHours()
+    var mn = today.getMinutes()
+    var secs = today.getSeconds()
+
+    return hr + ":" + mn + ":" + secs
 }
 
 /**

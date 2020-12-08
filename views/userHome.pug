@@ -18,7 +18,7 @@ block content
       i.fa.fa-plus
         span.fa-icon-text  New Client
 
-    //- Display clients if there are some
+    //- Display clients if there are some. 
     if clients.length > 0
       div.shadow-sm.my-3.br-white.rounded
         div.card-body
@@ -30,14 +30,16 @@ block content
                 div.container
                   div.row.mb-2
                     div.col-sm-9
-                      p.text-muted Last Updated: #{client.dt_updated}  ID: #{client.id} 
+                      p.text-muted 
+                        updated(id='userid' + client.id) Last Updated: #{client.dt_updated}
                     div.col-sm-3
                       a.btn.btn-primary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-pencil
                           span.fa-icon-text  New Note
                   div.row
                     div.col-sm-9
-                      h5.card-title.tocapitalize #{client.firstName} #{client.lastName}
+                      h5.card-title.tocapitalize 
+                        name(id='userid' + client.id) #{client.firstName} #{client.lastName}
                     div.col-sm-3
                       a.btn.btn-secondary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-user
