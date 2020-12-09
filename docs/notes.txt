@@ -22,8 +22,8 @@ https://github.com/mapbox/node-sqlite3/wiki
 -Add ability to add note in Client landing
 -Create Note landing
 -List 'Notes' in Client landing 
--Scrub the 'Create Client' form inputs (ie, No SQL injections)
--Scrub the 'Create Note' form inputs (ie, No SQL injections)
+-Scrub the 'Create Client' form inputs (ie, No SQL injections,no leading/trailing spaces)
+-Scrub the 'Create Note' form inputs (ie, No SQL injections, no leading/trailing spaces)
 -Encrypt SQLite db data
 -Setup login with credentials 
 -Create settings menu for user 

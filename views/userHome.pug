@@ -24,14 +24,20 @@ block content
         div.card-body
           h2.display-4 Clients
           hr
+          div.input-group
+            div.input-group-prepend
+              div.input-group-text 
+                i.fa.fa-search
+            input.form-control(id="inputNameSearch" type="text" placeholder="Search Clients..." onkeyup="userPageSearchName()")
           each client in clients
-            div.card.my-2.shadow-sm.rounded
+            - var userid = client.id
+            div.card.my-2.shadow-sm.rounded(id='userCard' + userid)
               div.card-body
                 div.container
                   div.row.mb-2
                     div.col-sm-9
-                      p.text-muted 
-                        updated(id='userid' + client.id) Last Updated: #{client.dt_updated}
+                      p.text-muted Last Update: 
+                        updated(id= userid) #{client.dt_updated}
                     div.col-sm-3
                       a.btn.btn-primary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-pencil
@@ -39,7 +45,7 @@ block content
                   div.row
                     div.col-sm-9
                       h5.card-title.tocapitalize 
-                        name(id='userid' + client.id) #{client.firstName} #{client.lastName}
+                        name(id= userid) #{client.firstName} #{client.lastName}
                     div.col-sm-3
                       a.btn.btn-secondary.btn-block(type='button' role='button' href='#')
                         i.fa.fa-user

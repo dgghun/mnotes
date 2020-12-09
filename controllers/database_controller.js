@@ -90,10 +90,13 @@ exports.retrieveClients = () => {
                         reject(err)
                     }
                     console.log(fname + "retrieveClients(): Clients retrieved successfully")
+                    
+                    // Modify date before sending
                     for(var key in rows){
                         var dateTime = rows[key].dt_updated
-                        rows[key].dt_updated = moment(dateTime).format('MM/DD/YYYY hh:mm:ss a')
+                        rows[key].dt_updated = moment(dateTime).format('MM/DD/YYYY hh:mm a')
                     }
+                    
                     resolve(rows)
                 })
                 closeDAO(db);
