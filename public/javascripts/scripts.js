@@ -27,7 +27,7 @@ function checkPhone() {
 /**
  * Search for clients and show/hide them 
  */
-function userPageSearchName(){
+function userPageSearchClients(){
     var nameTags = document.getElementsByTagName('name')
     var updateTags = document.getElementsByTagName('updated')
     var tags
@@ -37,7 +37,7 @@ function userPageSearchName(){
 
     //name or update date search?
     if(input.trim().match(/^\d/))
-        tags = updateTags   //looking for date updated
+        tags = updateTags   //starts with a digit, looking for date updated
     else
         tags = nameTags     //looking for a name
   
@@ -65,6 +65,10 @@ function sortByDateTime(tagName, ascending){
     }
 }
 
+function viewClient(userid){
+    console.log(userid)
+    $(".alert").fadeTo(100,1).delay(2000).fadeTo(500,0).slideUp(500)
+}
 
 //Need this???
 // function checkSpecialCharacters(arrayToCheck){

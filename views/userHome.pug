@@ -24,11 +24,15 @@ block content
         div.card-body
           h2.display-4 Clients
           hr
+          
+          //- Search bar
           div.input-group
             div.input-group-prepend
               div.input-group-text 
                 i.fa.fa-search
-            input.form-control(id="inputNameSearch" type="text" placeholder="Search Clients..." onkeyup="userPageSearchName()")
+            input.form-control(id="inputNameSearch" type="text" placeholder="Search Clients..." onkeyup="userPageSearchClients()")
+          
+          //- list all clients
           each client in clients
             - var userid = client.id
             div.card.my-2.shadow-sm.rounded(id='userCard' + userid)
@@ -47,9 +51,11 @@ block content
                       h5.card-title.tocapitalize 
                         name(id= userid) #{client.firstName} #{client.lastName}
                     div.col-sm-3
-                      a.btn.btn-secondary.btn-block(type='button' role='button' href='#')
-                        i.fa.fa-user
-                          span.fa-icon-text  View Client
+                      form(role='form' method="POST" action="/viewClient")
+                        input(type="hidden" name='userid' value= userid)
+                        button.btn.btn-secondary.btn-block(type='submit')
+                          i.fa.fa-user
+                            span.fa-icon-text  View Client
                 
 
   

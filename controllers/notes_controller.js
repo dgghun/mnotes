@@ -11,7 +11,16 @@ const app_name = "mnotes"
 const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
- 
+ exports.viewClient = (req, res, next) => {
+    
+    console.log(fname + "viewClient(): Userid" + req.body.userid)
+    
+    //TODO you are here!  
+    req.body = ''
+    landing.get_userHome(req, res, next)
+ }
+
+
  /**
   * Add new client page
   * @param {*} req 

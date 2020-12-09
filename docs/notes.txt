@@ -27,6 +27,7 @@ https://github.com/mapbox/node-sqlite3/wiki
 -Encrypt SQLite db data
 -Setup login with credentials 
 -Create settings menu for user 
+-Send user back to calling page if they try to POST or explicitly type a address route. See "catch all" in routes/index.js
 
 ###################################################################################
 
