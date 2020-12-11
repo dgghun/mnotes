@@ -72,6 +72,40 @@ exports.initDB = () => {
     }).catch(err => console.error(err))
 }
 
+/**
+ * Retrieces a single Client by id
+ * @param {*} userid - Client id
+ */
+exports.retrieveClient = (userid) => {
+    console.log(fname + "retrieveClient(): Getting client with userid = " + userid)
+    const querystr = "SELECT * FROM " + CLNT_TABLE + " WHERE id = ?"
+
+    return new Promise((resolve, reject) => {
+        this.getDAO().then(db => {
+            //Do this sequentially 
+            db.serialize(function (){
+                db.get(querystr, userid, (err, row) => {
+                    
+                    if (err) {
+                        console.log(fname + "retrieveClient():" + err.message)
+                        console.log(fname + "retrieveClient():" + err)
+                        reject(err)
+                        return
+                    }
+                    console.log(fname + "retrieveClient(): retrieved userid (" + userid + ") successfully")
+                    console.log(row)
+                    resolve(row)
+                    return
+                })
+            })
+            closeDAO(db);
+        }).catch(err => {
+            console.error(err)
+            console.error(err.message)
+            return err
+        })
+    })
+}
 
 /**
  * Retrieve Clients
@@ -88,6 +122,7 @@ exports.retrieveClients = () => {
                         console.log(fname + "retrieveClients():" + err.message)
                         console.log(fname + "retrieveClients():" + err)
                         reject(err)
+                        return
                     }
                     console.log(fname + "retrieveClients(): Clients retrieved successfully")
                     
@@ -98,6 +133,7 @@ exports.retrieveClients = () => {
                     }
                     
                     resolve(rows)
+                    return
                 })
                 closeDAO(db);
             })
@@ -108,6 +144,7 @@ exports.retrieveClients = () => {
         })
     })
 }
+
 
 /**
  * Adds a Client to db

@@ -11,28 +11,30 @@ const app_name = "mnotes"
 const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
- exports.viewClient = (req, res, next) => {
-    
-    console.log(fname + "viewClient(): Userid" + req.body.userid)
-    
-    //TODO you are here!  
-    req.body = ''
-    landing.get_userHome(req, res, next)
- }
 
+/**
+ * Render client page
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.viewClient = (req, res, next) => {
+   var userid = req.body.userid
+   console.log(fname + "viewClient(): Userid = " + userid)
 
- /**
-  * Add new client page
-  * @param {*} req 
-  * @param {*} res 
-  * @param {*} next 
-  */
- exports.get_newClient = (req, res, next) => {
-    var message = req.body.message
-    console.log(fname + "get_newClient: message = " + message)
-    res.render('newClient', getNewClient('Add New Client'));
- }
+   database.retrieveClient(userid)
+   .then(client =>{
+      console.log(fname + "retrieveClient(): retrieved " + client.firstName + " " + client.lastName)
+   }).catch(err =>{
+      console.log(fname + "retrieveClient():" + err)
+   })
 
+   //TODO you are here!  
+   req.body = ''
+   landing.get_userHome(req, res, next)
+}
+
+ 
  /**
   * Creates new client in database
   * @param {*} req 
@@ -40,11 +42,11 @@ const fname = "-->notes_controller.js:"    // file name for logging
   * @param {*} next 
   */
  exports.createNewClient = (req, res, next) => {
-   var fullName = req.body.firstName + " " + req.body.lastName
-
-   //Create new client in db
-   database.createClient(req.body)
-   .then(err => {
+    var fullName = req.body.firstName + " " + req.body.lastName
+    
+    //Create new client in db
+    database.createClient(req.body)
+    .then(err => {
       console.log(fname + "createNewClient() added '" + fullName + "'")
       req.body = {
          message: 'clientAdded',
@@ -64,9 +66,23 @@ const fname = "-->notes_controller.js:"    // file name for logging
    })
    
  }
+ 
+ 
+/**
+ * Add new client page
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.get_newClient = (req, res, next) => {
+   var message = req.body.message
+   console.log(fname + "get_newClient: message = " + message)
+   res.render('newClient', getNewClient('Add New Client'));
+}
 
- /**LOCAL FUNCTIONS */
- function getNewClient(msg){
+
+/**LOCAL FUNCTIONS */
+function getNewClient(msg) {
    var obj = new Object();
    obj.title = app_name;
 

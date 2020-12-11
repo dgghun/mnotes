@@ -48,8 +48,8 @@ block content
                           span.fa-icon-text  New Note
                   div.row
                     div.col-sm-9
-                      h5.card-title.tocapitalize 
-                        name(id= userid) #{client.firstName} #{client.lastName}
+                      h5.card-title
+                        name.tocapitalize(id= userid) #{client.firstName} #{client.lastName}
                     div.col-sm-3
                       form(role='form' method="POST" action="/viewClient")
                         input(type="hidden" name='userid' value= userid)
