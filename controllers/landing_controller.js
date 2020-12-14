@@ -87,6 +87,13 @@ function getUserHome(msg, req, clnts){
         obj.pugMsg = 'clientAddedError'
         obj.alertMsg = 'Client not added: ' +  newClient 
         obj.errorMsg = req.body.errormessage
+    }else if(msg == 'clientNotFoundById'){
+        var clientId = req.body.clientId
+        obj.message = header;
+        obj.doAlert = true;
+        obj.pugMsg = 'clientNotFoundById'
+        obj.alertMsg = 'Client ID not found: ' + clientId 
+        obj.errorMsg = req.body.errormessage
     }
     
     var str = JSON.stringify(obj);

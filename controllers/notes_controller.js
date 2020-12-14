@@ -19,19 +19,38 @@ const fname = "-->notes_controller.js:"    // file name for logging
  * @param {*} next 
  */
 exports.viewClient = (req, res, next) => {
+   var funcname = "retrieveClient():"
    var userid = req.body.userid
-   console.log(fname + "viewClient(): Userid = " + userid)
-
+   console.log(fname + funcname + "Userid = " + userid)
+   
+   userid = 666
    database.retrieveClient(userid)
    .then(client =>{
-      console.log(fname + "retrieveClient(): retrieved " + client.firstName + " " + client.lastName)
+      
+      //TODO you are here!  
+      if(client){
+         console.log(fname + funcname + " retrieved " + client.firstName + " " + client.lastName)
+         req.body = ''
+      }
+      else{
+         console.log(fname + funcname + " Userid " + userid + " not found.")
+         req.body = {
+            message: 'clientNotFoundById',
+            clientId: userid,
+            errormessage: 'clientNotFoundById'
+         }   
+      }
+      landing.get_userHome(req, res, next)
+
    }).catch(err =>{
       console.log(fname + "retrieveClient():" + err)
+      req.body = {
+         message: 'clientNotFoundById',
+         clientId: userid,
+         errormessage: err.message
+      }
    })
 
-   //TODO you are here!  
-   req.body = ''
-   landing.get_userHome(req, res, next)
 }
 
  

@@ -77,6 +77,7 @@ exports.initDB = () => {
  * @param {*} userid - Client id
  */
 exports.retrieveClient = (userid) => {
+    var funcname = "retrieveClient():"
     console.log(fname + "retrieveClient(): Getting client with userid = " + userid)
     const querystr = "SELECT * FROM " + CLNT_TABLE + " WHERE id = ?"
 
@@ -92,8 +93,12 @@ exports.retrieveClient = (userid) => {
                         reject(err)
                         return
                     }
-                    console.log(fname + "retrieveClient(): retrieved userid (" + userid + ") successfully")
-                    console.log(row)
+                    if(row){
+                        console.log(fname + "retrieveClient(): retrieved userid (" + userid + ") successfully")
+                        console.log(row)
+                    }else{
+                        console.log(fname + funcname + " Userid " + userid + " not found")
+                    }
                     resolve(row)
                     return
                 })
