@@ -23,14 +23,22 @@ exports.viewClient = (req, res, next) => {
    var userid = req.body.userid
    console.log(fname + funcname + "Userid = " + userid)
    
-   userid = 666
+
    database.retrieveClient(userid)
-   .then(client =>{
+   .then(client =>{      
       
-      //TODO you are here!  
       if(client){
-         console.log(fname + funcname + " retrieved " + client.firstName + " " + client.lastName)
-         req.body = ''
+         var clientName = client.firstName + " " + client.lastName
+         console.log(fname + funcname + " retrieved " + clientName)
+         var obj = new Object();
+         obj.title = app_name;
+         obj.message = "Client: " + clientName;           // preset default message
+         obj.doAlert = false;                // preset to no alert
+         obj.client = client;                // client info
+         
+         var str = JSON.stringify(obj);
+         res.render('clientHome',JSON.parse(str))
+         
       }
       else{
          console.log(fname + funcname + " Userid " + userid + " not found.")
@@ -53,7 +61,7 @@ exports.viewClient = (req, res, next) => {
 
 }
 
- 
+
  /**
   * Creates new client in database
   * @param {*} req 

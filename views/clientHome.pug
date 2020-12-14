@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  
+  //- sidebar.pug
+  include sidebar
+  
+  //- Body
+  div.container.w3-animate-opacity
+
+    //- Check for alerts
+    if doAlert
+      include alert
+
+    h1.display-3.tocapitalize= message
+    a.btn.btn-primary(type='button' role='button' href="/userHome") 
+      i.fa.fa-home
+        span.fa-icon-text  Home
+
+    //- Display clients if there are some. 
+    p= client.firstName
