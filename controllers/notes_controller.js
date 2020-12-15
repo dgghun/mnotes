@@ -28,11 +28,12 @@ exports.viewClient = (req, res, next) => {
    .then(client =>{      
       
       if(client){
-         var clientName = client.firstName + " " + client.lastName
+         var clientName = client.firstName
+         var msg = clientName.trim() + '\'s Info'
          console.log(fname + funcname + " retrieved " + clientName)
          var obj = new Object();
          obj.title = app_name;
-         obj.message = "Client: " + clientName;           // preset default message
+         obj.message = msg;           // preset default message
          obj.doAlert = false;                // preset to no alert
          obj.client = client;                // client info
          

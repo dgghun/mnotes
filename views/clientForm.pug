@@ -1,0 +1,64 @@
+//- div.form-row
+  div.form-group.col-md
+    label(for='date') Date
+    input(required type="date" id="date").form-control
+//- document.getElementById('date').valueAsDate = new Date(); //set date input to current    
+div.form-row
+  div.form-group.col-md
+    label(for='firstName') First Name
+    input(required type='text' id='firstName' name='firstName' placeholder='First Name').form-control.toupper
+  div.form-group.col-md
+    label(for='lastName') Last Name
+    input(required type='text' id='lastName' name='lastName' placeholder='Last Name').form-control.toupper
+  div.form-group.col-md
+    label(for='middleName') Middle Name
+    input(type='text' id='middleName' name='middleName' placeholder='Middle Name').form-control.toupper
+div.form-group
+  label(for='address1') Address 1
+  input(type='text' id='address1' name='address1' placeholder='1234 Some St').form-control.toupper
+div.form-group
+  label(for='address2') Address 2
+  input(type='text' id='address2' name='address2' placeholder='Apt, Suite, floor').form-control.toupper
+div.form-row
+  div.form-group.col-md-6
+    label(for='city') City
+    input(type='text' id='city' name='city' placeholder='City').form-control.toupper
+  div.form-group.col-md-2
+    label(for='state') State
+    select(id='state' name='state').form-control.toupper
+      include stateslist
+  div.form-group.col-md-4
+    label(for='zip') Zip
+    input(type='text' id='zip' name='zip' placeholder='Zip').form-control.toupper
+div.form-row
+  div.form-group.col-md-3
+    label(for='phone') Phone
+    input(type='tel' id='phone' name='phone' placeholder='555-555-5555' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}').form-control.toupper
+  div.form-group.col-md-5
+    label(for='email') Email
+    input(type='email' id='email' name='email' placeholder="email@email.com").form-control
+div.form-row
+  div.form-group.col-md-3
+    label(for='ethnicity') Ethnicity
+    input(type='text' id='ethnicity' name='ethnicity' placeholder='Ethnicity').form-control.toupper
+  div.form-group.col-md-3
+    label(for='marital_status') Marital Status
+    select(id='marital_status' name='maritalStatus').form-control.toupper
+      option(value="" selected) --Marital Status--
+      option(value="Single") Single
+      option(value="Married") Married
+      option(value="Widowed") Widowed
+      option(value="Separated") Separated
+      option(value="Divorced") Divorced
+
+append foot
+      script.
+        checkPhone('phone')
+        checkName('firstName')
+        checkName('lastName')
+        checkName('middleName')
+        checkAddress('address1')
+        checkAddress('address2')
+        checkName('city')
+        checkZip('zip')
+        checkName('ethnicity')
