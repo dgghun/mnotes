@@ -1,3 +1,6 @@
+#User added ignores
+*montes.db*
+
 # Logs
 logs
 *.log
