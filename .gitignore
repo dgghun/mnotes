@@ -1,6 +1,5 @@
 #User added ignores
-data
-*db
+./data/*
 
 # Logs
 logs
