@@ -5,23 +5,62 @@
  */
 
  /**
-  * Checks and formats phone field input
-  */
-function checkPhone() {
+ * Formats a phone input field
+ * @param {*} tagId - HTML tag id to format
+ */
+function checkPhone(tagId) {
+    var id = '#' + tagId
     // Jquery to check input
-    $('#phone').on('input', function (e) {
-        var phone = document.getElementById('phone').value
-        phone = phone.replace(/\D/g, '')
+    $(id).on('input', function (e) {
+        var phone = document.getElementById(tagId).value
+        phone = phone.replace(/\D/g, '')    // replace all non numeric chars with nothing
 
         if (phone.length >= 10) {
             phone = phone.replace(/[-]/g, '')
             var tmp = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6, 10)
             phone = tmp
         }
-
-        document.getElementById('phone').value = phone
+        console.log(phone)
+        document.getElementById(tagId).value = phone
     })
+}
 
+
+/**
+ * Formats a name input field
+ * @param {*} tagId - HTML tag id to format
+ */
+function checkName(tagId) {
+    var id = '#' + tagId
+    $(id).on('input', function (e) {
+        var name = document.getElementById(tagId).value
+        name = name.replace(/[^A-Za-z\d\s]/g,'')  //replace all non alphanumeric chars and spaces with nothing
+        document.getElementById(tagId).value = name
+    })
+}
+
+
+/**
+ * Formats an address input field
+ * @param {*} tagId - HTML tag id to format
+ */
+function checkAddress(tagId){
+    var id = '#' + tagId
+    $(id).on('input', function (e){
+        var address = document.getElementById(tagId).value
+        address = address.replace(/[^A-Za-z\d\s\#]/g,'')    //replace all non alphanumeric chars, spaces and hash tag with nothing
+        document.getElementById(tagId).value = address
+    })
+}
+
+
+function checkZip(tagId){
+    var id = '#' + tagId
+    $(id).on('input', function (e){
+        var zip = document.getElementById(tagId).value
+        zip = zip.replace(/[^\d\s\-]/g, '')     //replace all non digit, space or dash '-' chars with nothing
+        document.getElementById(tagId).value = zip
+    })
 }
 
 /**
