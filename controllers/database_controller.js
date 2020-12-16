@@ -63,8 +63,8 @@ exports.initDB = () => {
         //Do these sequentially 
         db.serialize(function() {
             // For testing
-            dropTable(db,CLNT_TABLE);
-            dropTable(db,NOTE_TABLE);
+            // dropTable(db,CLNT_TABLE);
+            // dropTable(db,NOTE_TABLE);
 
             createTable(db, CLNT_TABLE, CLNT_INIT)
             closeDAO(db);
@@ -95,7 +95,6 @@ exports.retrieveClient = (userid) => {
                     }
                     if(row){
                         console.log(fname + "retrieveClient(): retrieved userid (" + userid + ") successfully")
-                        console.log(row)
                     }else{
                         console.log(fname + funcname + " Userid " + userid + " not found")
                     }
@@ -238,7 +237,7 @@ function getTime(){
  * @param {*} tableQuery  - SQLite query string
  */
 function createTable(db,tableName, tableQuery){
-    const querystr = "CREATE TABLE " + 
+    const querystr = "CREATE TABLE IF NOT EXISTS " + 
                      tableName + tableQuery;
     db.run(querystr, err => {
         if (err) {

@@ -4,6 +4,16 @@
  * Description: generic app scripts
  */
 
+
+function addClientToForm(client){
+    //TODO add client to form and allow/dont allow editing.
+    $(function(){
+        for(x in client)
+            console.log(x + ' = (' + client[x] + ')')
+
+    })
+}
+
  /**
  * Formats a phone input field
  * @param {*} tagId - HTML tag id to format

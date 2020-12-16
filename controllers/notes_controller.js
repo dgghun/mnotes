@@ -31,6 +31,7 @@ exports.viewClient = (req, res, next) => {
          var clientName = client.firstName
          var msg = clientName.trim() + '\'s Info'
          console.log(fname + funcname + " retrieved " + clientName)
+         
          var obj = new Object();
          obj.title = app_name;
          obj.message = msg;           // preset default message
@@ -48,9 +49,9 @@ exports.viewClient = (req, res, next) => {
             clientId: userid,
             errormessage: 'clientNotFoundById'
          }   
+         landing.get_userHome(req, res, next)
       }
-      landing.get_userHome(req, res, next)
-
+      
    }).catch(err =>{
       console.log(fname + "retrieveClient():" + err)
       req.body = {
@@ -58,6 +59,7 @@ exports.viewClient = (req, res, next) => {
          clientId: userid,
          errormessage: err.message
       }
+      landing.get_userHome(req, res, next)
    })
 
 }

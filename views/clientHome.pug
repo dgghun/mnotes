@@ -19,3 +19,8 @@ block content
 
     //- Display clients if there are some. 
     include clientForm
+
+append foot
+  script.
+    var str = !{JSON.stringify(client)}
+    addClientToForm(str)
