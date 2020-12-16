@@ -5,12 +5,22 @@
  */
 
 
-function addClientToForm(client){
-    //TODO add client to form and allow/dont allow editing.
-    $(function(){
-        for(x in client)
-            console.log(x + ' = (' + client[x] + ')')
+function addClientToForm(client) {
+    
+    $(function () {
+        for (x in client)
+            try {
+                document.getElementById(x).value = client[x]
+                var inputType = document.getElementById(x).type
+                
+                if(inputType.indexOf('select') > -1)
+                    document.getElementById(x).disabled = true  //select input field
+                else
+                    document.getElementById(x).readOnly = true  // all other input fields
 
+            } catch (error) {
+                console.log('ERROR: (' + x + ') HTML tag not found on page')
+            }
     })
 }
 
