@@ -8,10 +8,13 @@ block content
   //- Body
   div.container.w3-animate-opacity
     h1.display-3= message
+    a.btn.btn-secondary(type='button' role='button' href="/userHome") 
+        i.fa.fa-home
+          span.fa-icon-text  Home
     
     //- Form start
     hr
-    form(id='createNewClient' role='form' method="POST" action="/createNewClient")
+    form(id='createNewClient' role='form' method="POST" action="/createNewClient" onsubmit="return confirm('Everything look okay before saving?');")
       include clientForm
       button(for='createNewClient' type='submit').btn.btn-primary 
         i.fa.fa-plus

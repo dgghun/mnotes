@@ -4,7 +4,6 @@
  * Description: generic app scripts
  */
 
-
 /**
  * Add client info to client form
  * @param {JSON} client - client JSON string
@@ -12,20 +11,40 @@
  */
 function addClientToForm(client, trueOrFalse) {
     
-    $(function () {
-        for (x in client)
+    $(document).ready(function () {
+        for (x in client){
             try {
-                document.getElementById(x).value = client[x]
-                var inputType = document.getElementById(x).type
-                
-                if(inputType.indexOf('select') > -1)
-                    document.getElementById(x).disabled = trueOrFalse  //select input field
-                else
-                    document.getElementById(x).readOnly = trueOrFalse  // all other input fields
+                var element = document.getElementById(x)
+                if(x == 'id'){
+                    element.innerText = 'ID: ' + client[x]
+                    continue
+                }
+                else if(x == 'dt_created'){
+                    var dt = 'Created: ' + moment(client.dt_created).format('MM/DD/YYYY')
+                    element.innerText = dt.trim()
+                    continue
+                }
+                else if(x == 'dt_updated'){
+                    var dt = 'Last Update: ' + moment(client.dt_created).format('MM/DD/YYYY')
+                    element.innerText = dt.trim()
+                    continue
+                }
 
+                element.innerText = client[x]
+                element.value = client[x]
+                element.placeholder = ''
+                var inputType = element.type
+                
+
+                if(inputType.indexOf('select') > -1)
+                    element.disabled = trueOrFalse  //select input field
+                else
+                    element.readOnly = trueOrFalse  // all other input fields
+                
             } catch (error) {
-                console.log('ERROR: (' + x + ') HTML tag not found on page')
+                console.log('addClientToForm(): \'' + x + '\' ' + error)
             }
+        }
     })
 }
 

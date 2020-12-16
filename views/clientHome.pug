@@ -16,10 +16,14 @@ block content
       div.col-sm-9
         h1.display-3.tocapitalize.nooverflow= message
       div.col-sm-3
-        h1.display-4(style='bottom:0; position: absolute;')= 'ID: ' + client.id
-    a.btn.btn-primary(type='button' role='button' href="/userHome") 
+        //- h1.display-4(style='bottom:0; position: absolute;')= 'ID: ' + client.id
+        p.lead.my-0(id="id")= client.id
+        p.lead.my-0(id="dt_created")= client.dt_created
+        p.lead.my-0(id="dt_updated")= client.dt_updated
+    a.btn.btn-secondary(type='button' role='button' href="/userHome") 
       i.fa.fa-home
         span.fa-icon-text  Home
+    hr
 
     //- Show Client form info
     include clientForm

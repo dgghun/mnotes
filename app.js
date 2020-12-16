@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({extended: true}));  //DGG body parser
 app.use(bodyParser.json());   //DGG json body parser
 
 app.use(favicon(__dirname + '/public/images/favicon.ico')); //browser icon
+app.use('/js', express.static(path.join(__dirname, 'node_modules/moment/min')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/popper.js/dist')))
 app.use('/css', express.static(path.join(__dirname, 'node_modules/font-awesome/css')))
