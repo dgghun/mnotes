@@ -5,7 +5,12 @@
  */
 
 
-function addClientToForm(client) {
+/**
+ * Add client info to client form
+ * @param {JSON} client - client JSON string
+ * @param {boolean} trueOrFalse - disable input?
+ */
+function addClientToForm(client, trueOrFalse) {
     
     $(function () {
         for (x in client)
@@ -14,9 +19,9 @@ function addClientToForm(client) {
                 var inputType = document.getElementById(x).type
                 
                 if(inputType.indexOf('select') > -1)
-                    document.getElementById(x).disabled = true  //select input field
+                    document.getElementById(x).disabled = trueOrFalse  //select input field
                 else
-                    document.getElementById(x).readOnly = true  // all other input fields
+                    document.getElementById(x).readOnly = trueOrFalse  // all other input fields
 
             } catch (error) {
                 console.log('ERROR: (' + x + ') HTML tag not found on page')
