@@ -20,15 +20,49 @@ block content
         p.lead.my-0(id="id")= client.id
         p.lead.my-0(id="dt_created")= client.dt_created
         p.lead.my-0(id="dt_updated")= client.dt_updated
-    a.btn.btn-secondary(type='button' role='button' href="/userHome") 
-      i.fa.fa-home
-        span.fa-icon-text  Home
+
+    //- Buttons
+    div.row
+      div.col-sm-2.ml-3.mr-1.px-0
+        a.btn.btn-primary.btn-block(type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Edit user fields") 
+          i.fa.fa-user
+            span.fa-icon-text  Edit
+      div.col-sm-2.mx-1.px-0
+        a.btn.btn-primary.btn-block(type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Create new note") 
+          i.fa.fa-pencil
+            span.fa-icon-text  New Note
+      div.col-sm-2.mx-1.px-0
+        a.btn.btn-secondary.btn-block(type='button' role='button' href="/userHome" data-toggle="tooltip" data-placement="top" title="Go to your home page") 
+          i.fa.fa-home
+            span.fa-icon-text  Home
     hr
 
-    //- Show Client form info
-    include clientForm
+    //- Show Client form info and notes
+    div.row.row-col-2
+      div.col
+        include clientForm
+      div.col
+        h1.lead Notes
+          span.ml-1.badge.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") 0
+        hr
+        div.card.my-2.shadow-sm.rounded
+          div.card-body
+              div.row.mb-2
+                div.col-sm-9
+                  p.align-middle.text-muted Client Name
+                div.col-sm-3
+                  a.btn.btn-primary.px-0.btn-block(type='button' role='button' href='#')
+                    i.fa.fa-search
+                      span.fa-icon-text  View
+  
 
 append foot
   script.
+    //- enable bootstrap tooltips (Enable tooltips everywhere)
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    
+    //- load client form and disable input
     var str = !{JSON.stringify(client)}
-    addClientToForm(str, true)  //client and disable input
+    addClientToForm(str, true)  
