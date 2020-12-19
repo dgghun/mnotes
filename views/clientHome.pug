@@ -24,26 +24,34 @@ block content
     //- Buttons
     div.row
       div.col-sm-2.ml-3.mr-1.px-0
-        a.btn.btn-primary.btn-block(type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Edit user fields") 
+        a.btn.btn-primary.btn-block(id='btnEdit' type='button' role='button' onclick='showUpdateClient(clientStr)' data-toggle="tooltip" data-placement="top" title="Edit client info") 
           i.fa.fa-user
             span.fa-icon-text  Edit
       div.col-sm-2.mx-1.px-0
-        a.btn.btn-primary.btn-block(type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Create new note") 
+        a.btn.btn-primary.btn-block(id='btnNewNote' type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Create a new note") 
           i.fa.fa-pencil
             span.fa-icon-text  New Note
       div.col-sm-2.mx-1.px-0
-        a.btn.btn-secondary.btn-block(type='button' role='button' href="/userHome" data-toggle="tooltip" data-placement="top" title="Go to your home page") 
+        a.btn.btn-secondary.btn-block(id='btnHome' type='button' role='button' href="/userHome" data-toggle="tooltip" data-placement="top" title="Go to your home page") 
           i.fa.fa-home
             span.fa-icon-text  Home
     hr
 
     //- Show Client form info and notes
     div.row.row-col-2
-      div.col
-        include clientForm
-      div.col
+      //- client form
+      div(id="divClientForm").col
+        form(id='formUpdateClient' role='form' method="POST" action="/updateClient" onsubmit="return confirm('Everything look okay before saving?');")
+          include clientForm
+          button(id="btnUpdateClient" for='formUpdateClient' type='submit' style='display: none').btn.btn-primary
+            i.fa.fa-plus
+              span.fa-icon-text  Save
+          button(id="btnCancelUpdate" type='button' onclick='#' style='display: none').btn.btn-secondary.ml-1 Cancel
+
+      //- client notes
+      div(id="divClientNotes").col
         h1.lead Notes
-          span.ml-1.badge.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") 0
+          span.ml-1.badge.badge-pill.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") 0
         hr
         div.card.my-2.shadow-sm.rounded
           div.card-body
@@ -64,5 +72,5 @@ append foot
     })
     
     //- load client form and disable input
-    var str = !{JSON.stringify(client)}
-    addClientToForm(str, true)  
+    var clientStr = !{JSON.stringify(client)}
+    addClientToForm(clientStr, true)  

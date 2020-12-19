@@ -111,3 +111,7 @@ body {
   border-left: none !important;
   border-bottom: 2px solid #007bff !important;
 }
+
+.hide {
+  display: none;
+}
