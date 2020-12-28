@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  if doAlert
+    include alert
   div.container.text-center.w3-animate-opacity
     img(src="images/favicon.ico" width="10%").mx-auto.d-block
     h1.display-1= title

@@ -46,15 +46,23 @@ exports.get_landing_err = (req, res, next) =>{
     var errMsg = '-->get_landing_err: No route for ' + urlMeth + ' ' + urlReq
     console.error(errMsg);
 
-    res.render('index',getLanding());
+    res.render('index',getLanding(errMsg));
 };
 
 
 /**LOCAL FUNCTIONS */
 
-function getLanding(){
+function getLanding(msg){
     var obj = new Object();
     obj.title = app_name;
+    obj.doAlert = false;
+    obj.pugMsg = ''
+
+    if(msg){
+        obj.doAlert = true
+        obj.pugMsg = 'routeError'
+        obj.alertMsg = msg
+    }
 
     var str = JSON.stringify(obj);
     return JSON.parse(str);

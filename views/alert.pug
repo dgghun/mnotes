@@ -14,7 +14,7 @@ if pugMsg == 'clientAddedError'
     hr
     p #{errorMsg}      
 
-if pugMsg == 'clientNotFoundById'
+if pugMsg == 'clientNotFoundById' || pugMsg == 'routeError'
   - doAlert = true
   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
     i.fa.fa-exclamation-circle.fa-lg 
