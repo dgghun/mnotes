@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  
+  //- sidebar.pug
+  include sidebar
+  
+  //- Body
+  div.container.w3-animate-opacity
+
+    //- Check for alerts
+    if doAlert
+      include alert
+
+    div.row
+      div.col-9
+        h1.display-3.tocapitalize= message
+      div.col-3
+        //- h1.display-4(style='bottom:0; position: absolute;')= 'ID: ' + client.id
+        p.lead.my-0(id="id")= 'ID: ' + client.id
+        p.lead.my-0(id="dt_created")= 'Created: ' + client.dt_created
+        p.lead.my-0(id="dt_updated")= 'Updated: ' + client.dt_updated
+
+    //- Buttons
+    div.row
+      div.col-sm-2.ml-3.mr-1.px-0
+        form(id='formCancelClientUpdate' role="form" method='POST' action="#" onsubmit="return confirm('Cancel update? All changes will be lost.');")
+          input(type="hidden" name='userid' value= client.id)
+          button.btn.btn-danger.btn-block(id='btnCancel' type='submit' data-toggle="tooltip" data-placement="top" title="Cancel update.") 
+            i.fa.fa-times
+              span.fa-icon-text  Cancel
+      div.col-sm-2.mx-1.px-0
+        a.btn.btn-secondary.btn-block(id='btnHome' type='button' role='button' href="/userHome" data-toggle="tooltip" data-placement="top" title="Go to your home page") 
+          i.fa.fa-home
+            span.fa-icon-text  Home
+    hr
+
+    //- Show Client form info
+    div
+      //- client form
+      form(id='formUpdateClient' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
+        include clientForm
+        button(id="btnUpdateClient" for='formUpdateClient' type='submit').btn.btn-primary
+          i.fa.fa-plus
+            span.fa-icon-text  Save
+
+
+append foot
+  script.
+    //- enable bootstrap tooltips (Enable tooltips everywhere)
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    
+    //- load client form and disable input
+    var clientStr = !{JSON.stringify(client)}
+    addClientToForm(clientStr, false)  

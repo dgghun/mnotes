@@ -43,9 +43,14 @@ function addClientToForm(client, trueOrFalse) {
                     continue
                 }
 
-                element.innerText = client[x]
                 element.value = client[x]
-                element.placeholder = ''
+                
+                //If disabling inputs, do this too
+                if(trueOrFalse){
+                    element.innerText = client[x]
+                    element.placeholder = ''
+                }
+                
                 var inputType = element.type
                 
 
