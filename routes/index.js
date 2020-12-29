@@ -4,13 +4,15 @@ var router = express.Router();
 let landing = require("../controllers/landing_controller")   //Home page
 let notes = require("../controllers/notes_controller")    //notes
 
-router.get("/", landing.get_landing);             // Home page
-router.get("/userHome", landing.get_userHome)     // User home page
-router.get("/newClient",notes.get_newClient)   // add new client
+router.get("/", landing.get_landing);                   // Home page
+router.get("/userHome", landing.get_userHome)           // User home page
+router.get("/newClient",notes.get_newClient)            // add new client
+router.get("/editClient",notes.editClient)              // edit client
 
 router.post("/userHome", landing.get_userHome)          // User home page
 router.post("/createNewClient", notes.createNewClient)  // add new client to db
 router.post("/viewClient", notes.viewClient)            // view Client page
+router.post("/editClient",notes.editClient)             // edit client
 
 
 //DGG test error page

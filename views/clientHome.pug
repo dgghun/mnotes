@@ -24,7 +24,7 @@ block content
     //- Buttons
     div.row
       div.col-sm-2.ml-3.mr-1.px-0
-        form(id='formUpdateClient' role="form" method='POST' action="/updateClient")
+        form(id='formUpdateClient' role="form" method='POST' action="/editClient")
           input(type="hidden" name='userid' value= client.id)
           button.btn.btn-primary.btn-block(id='btnEdit' type='submit' data-toggle="tooltip" data-placement="top" title="Edit client info") 
             i.fa.fa-user

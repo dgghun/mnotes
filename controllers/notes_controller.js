@@ -12,6 +12,50 @@ const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
 
+exports.editClient = (req, res, next) => {
+   var funcname = 'editClient():'
+   var userid = req.body.userid
+   console.log(fname + funcname + "Userid = " + userid)
+
+   database.retrieveClient(userid)
+   .then(client =>{      
+      
+      if(client){
+         var clientName = client.firstName
+         var msg = 'Editing ' + clientName.trim() + '\'s Info'
+         console.log(fname + funcname + " retrieved " + clientName)
+         
+         var obj = new Object();
+         obj.title = app_name;
+         obj.message = msg;           // preset default message
+         obj.doAlert = false;                // preset to no alert
+         obj.client = client;                // client info
+         
+         var str = JSON.stringify(obj);
+         res.render('editClient',JSON.parse(str))
+         
+      }
+      else{
+         console.log(fname + funcname + " Userid " + userid + " not found.")
+         req.body = {
+            message: 'clientNotFoundById',
+            clientId: userid,
+            errormessage: 'clientNotFoundById'
+         }   
+         landing.get_userHome(req, res, next)
+      }
+      
+   }).catch(err =>{
+      console.log(fname + "retrieveClient():" + err)
+      req.body = {
+         message: 'clientNotFoundById',
+         clientId: userid,
+         errormessage: err.message
+      }
+      landing.get_userHome(req, res, next)
+   })
+}
+
 /**
  * Render client page
  * @param {*} req 
