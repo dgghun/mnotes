@@ -4,18 +4,6 @@
  * Description: generic app scripts
  */
 
-function showUpdateClient(client){
-    $(document).ready(function(){
-        $('#btnUpdateClient').show()
-        $('#btnCancelUpdate').show()
-        $('#divClientNotes').hide()
-        $('#btnEdit').hide()
-        $('#btnNewNote').hide()
-        $('#btnHome').hide()
-        
-        addClientToForm(client, false)
-    })
-}
 
 /**
  * Add client info to client form

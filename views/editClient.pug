@@ -24,9 +24,9 @@ block content
     //- Buttons
     div.row
       div.col-sm-2.ml-3.mr-1.px-0
-        form(id='formCancelClientUpdate' role="form" method='POST' action="#" onsubmit="return confirm('Cancel update? All changes will be lost.');")
+        form(id='formCancelClientUpdate' role="form" method='POST' action="/viewClient")
           input(type="hidden" name='userid' value= client.id)
-          button.btn.btn-danger.btn-block(id='btnCancel' type='submit' data-toggle="tooltip" data-placement="top" title="Cancel update.") 
+          button.btn.btn-danger.btn-block(id='btnCancel' type='submit' data-toggle="tooltip" data-placement="top" title="Cancel update. Any changes will be lost.") 
             i.fa.fa-times
               span.fa-icon-text  Cancel
       div.col-sm-2.mx-1.px-0
@@ -38,7 +38,8 @@ block content
     //- Show Client form info
     div
       //- client form
-      form(id='formUpdateClient' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
+      form(id='formUpdateClient' role='form' method="POST" action="/updateClient" onsubmit="return confirm('Everything look okay before saving?');")
+        input(type="hidden" name='id' value= client.id)
         include clientForm
         button(id="btnUpdateClient" for='formUpdateClient' type='submit').btn.btn-primary
           i.fa.fa-plus

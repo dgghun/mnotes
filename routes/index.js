@@ -13,6 +13,7 @@ router.post("/userHome", landing.get_userHome)          // User home page
 router.post("/createNewClient", notes.createNewClient)  // add new client to db
 router.post("/viewClient", notes.viewClient)            // view Client page
 router.post("/editClient",notes.editClient)             // edit client
+router.post("/updateClient",notes.updateClient)             // update client
 
 
 //DGG test error page

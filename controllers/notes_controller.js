@@ -12,6 +12,25 @@ const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
 
+
+ exports.updateClient = (req, res, next) => {
+   var funcname = 'updateClient():'
+   var userid = req.body.id
+   var client = req.body
+   console.log(fname + funcname + "Userid = " + userid)
+
+
+   //TODO you are here
+   database.updateClient(client)
+ }
+
+
+ /**
+  * Render Edit Client page
+  * @param {*} req 
+  * @param {*} res 
+  * @param {*} next 
+  */
 exports.editClient = (req, res, next) => {
    var funcname = 'editClient():'
    var userid = req.body.userid
