@@ -18,10 +18,39 @@ const fname = "-->notes_controller.js:"    // file name for logging
    var userid = req.body.id
    var client = req.body
    console.log(fname + funcname + "Userid = " + userid)
-
+   
+   var clientName = client.firstName
+   var msg = clientName.trim() + '\'s Info'
+   var obj = new Object();
+   obj.title = app_name;
+   obj.message = msg;                  // preset default header message
 
    //TODO you are here
    database.updateClient(client)
+   .then(err => {
+      console.log(fname + funcname + " updated " + clientName)
+      
+      obj.doAlert = true;                 //do alert
+      obj.pugMsg = 'clientUpdated'        //alert type
+      obj.alertMsg = 'Updated ' +  clientName + '\'s info successfully!'
+      obj.client = client;                // client info
+      
+      var str = JSON.stringify(obj);
+      res.render('clientHome',JSON.parse(str))
+      
+   })
+   .catch(err => {
+      console.log(fname + funcname + err)
+      obj.doAlert = true;                 //do alert
+      obj.pugMsg = 'clientUpdateError'
+      obj.alertMsg = 'Client not updated: ' +  clientName + ' (id:' + userid + ')' 
+      obj.errorMsg = err.message
+      obj.client = client;                // client info
+      
+      var str = JSON.stringify(obj);
+      res.render('clientHome',JSON.parse(str))
+      
+   })
  }
 
 

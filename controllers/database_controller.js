@@ -99,7 +99,7 @@ exports.updateClient = (client) => {
         
     var curDateTime = getDateTime()
     clientValues.push(curDateTime)    //add date updated
-    clientValues.push(userid)         // set id
+    clientValues.push(userid)         //set id
 
     return new Promise((resolve,reject) => {
         this.getDAO().then(db => {
