@@ -31,18 +31,18 @@ div.form-row
     label(for='zip') Zip
     input(type='text' id='zip' name='zip' placeholder='Zip').form-control.toupper
 div.form-row
-  div.form-group.col-md-3
+  div.form-group.col-md-4
     label(for='phone') Phone
     input(type='tel' id='phone' name='phone' placeholder='555-555-5555' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}').form-control.toupper
-  div.form-group.col-md-5
+  div.form-group.col-md-8
     label(for='email') Email
     input(type='email' id='email' name='email' placeholder="email@email.com").form-control
 div.form-row
-  div.form-group.col-md-3
+  div.form-group.col-md-6
     label(for='ethnicity') Ethnicity
     input(type='text' id='ethnicity' name='ethnicity' placeholder='Ethnicity').form-control.toupper
-  div.form-group.col-md-3.nowrap
-    label(for='maritalStatus') Marital Status
+  div.form-group.col-md-6
+    label(for='maritalStatus').nowrap Marital Status
     select(id='maritalStatus' name='maritalStatus').form-control.toupper
       option(value="" selected) --Marital Status--
       option(value="Single") Single

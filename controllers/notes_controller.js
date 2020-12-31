@@ -30,26 +30,35 @@ const fname = "-->notes_controller.js:"    // file name for logging
    .then(err => {
       console.log(fname + funcname + " updated " + clientName)
       
-      obj.doAlert = true;                 //do alert
-      obj.pugMsg = 'clientUpdated'        //alert type
-      obj.alertMsg = 'Updated ' +  clientName + '\'s info successfully!'
-      obj.client = client;                // client info
+      req.body = {
+         userid:  req.body.id,
+         doAlert: true,
+         pugMsg: 'clientUpdated',        
+         alertMsg: 'Updated ' +  clientName + '\'s info successfully!'
+      }
+
+      this.viewClient(req, res, next)
+      // obj.doAlert = true;                 //do alert
+      // obj.pugMsg = 'clientUpdated'        //alert type
+      // obj.alertMsg = 'Updated ' +  clientName + '\'s info successfully!'
+      // obj.client = client;                // client info
       
-      var str = JSON.stringify(obj);
-      res.render('clientHome',JSON.parse(str))
+      // var str = JSON.stringify(obj);
+      // res.render('clientHome',JSON.parse(str))
       
    })
    .catch(err => {
       console.log(fname + funcname + err)
-      obj.doAlert = true;                 //do alert
-      obj.pugMsg = 'clientUpdateError'
-      obj.alertMsg = 'Client not updated: ' +  clientName + ' (id:' + userid + ')' 
-      obj.errorMsg = err.message
-      obj.client = client;                // client info
-      
-      var str = JSON.stringify(obj);
-      res.render('clientHome',JSON.parse(str))
-      
+
+      req.body = {
+         userid:  req.body.id,
+         doAlert: true,
+         pugMsg: 'clientUpdateError',        
+         alertMsg: 'Client not updated: ' +  clientName + ' (id:' + userid + ')',
+         errorMsg: err.message
+      }
+
+      this.viewClient(req, res, next)
    })
  }
 
@@ -127,9 +136,18 @@ exports.viewClient = (req, res, next) => {
          var obj = new Object();
          obj.title = app_name;
          obj.message = msg;           // preset default message
-         obj.doAlert = false;                // preset to no alert
          obj.client = client;                // client info
          
+         //Have an alert message?
+         if(req.body.doAlert){
+            obj.doAlert = req.body.doAlert
+            obj.pugMsg = req.body.pugMsg
+            obj.alertMsg = req.body.alertMsg
+            obj.errorMsg = req.body.errorMsg
+         }else{
+            obj.doAlert = false;                // preset to no alert
+         }
+
          var str = JSON.stringify(obj);
          res.render('clientHome',JSON.parse(str))
          

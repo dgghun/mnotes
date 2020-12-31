@@ -40,25 +40,23 @@ block content
     hr
 
     //- Show Client form info and notes
-    div.row.row-col-2
+    div.row
       //- client form
-      div(id="divClientForm").col
+      div(id="divClientForm").col-7
         include clientForm
 
       //- client notes
-      div(id="divClientNotes").col
+      div(id="divClientNotes").col-5
         h1.lead Notes
           span.ml-1.badge.badge-pill.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") 0
         hr
         div.card.my-2.shadow-sm.rounded
           div.card-body
               div.row.mb-2
-                div.col-sm-9
+                div.col-sm-8
                   p.align-middle.text-muted Client Name
-                div.col-sm-3
-                  a.btn.btn-primary.px-0.btn-block(type='button' role='button' href='#')
-                    i.fa.fa-search
-                      span.fa-icon-text  View
+                div.col-sm-4
+                  a.btn.btn-primary.btn-sm.px-0.btn-block(type='button' role='button' href='#') View
   
 
 append foot

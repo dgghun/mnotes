@@ -31,18 +31,18 @@ const CLNT_INIT = "(" +
                   "dt_created TEXT," +
                   "dt_updated TEXT" +
                   ");";
-const CLNT_UPDATE = "firstName = ?," +
-                    "lastName = ?," +
-                    "middleName = ?," +
-                    "address1 = ?," +
-                    "address2 = ?," +
-                    "city = ?," +
-                    "state = ?," +
-                    "zip = ?," +
-                    "phone = ?," +
-                    "email = ?," +
-                    "ethnicity = ?," +
-                    "maritalStatus = ?," +
+const CLNT_UPDATE = "firstName = ?, " +
+                    "lastName = ?, " +
+                    "middleName = ?, " +
+                    "address1 = ?, " +
+                    "address2 = ?, " +
+                    "city = ?, " +
+                    "state = ?, " +
+                    "zip = ?, " +
+                    "phone = ?, " +
+                    "email = ?, " +
+                    "ethnicity = ?, " +
+                    "maritalStatus = ?, " +
                     "dt_updated = ?" 
 
 /**
@@ -88,30 +88,30 @@ exports.initDB = () => {
 exports.updateClient = (client) => {
     var funcname = 'updateClient():'
     var userid = client.id
-    console.log(fname + funcname + 'Updateding client with userid = ' + userid)
+    console.log(fname + funcname + 'Updating client with userid = ' + userid)
     const querystr = "UPDATE " + CLNT_TABLE + " SET " + CLNT_UPDATE + " WHERE id = ?"
-    
+
     var clientValues = [];
-    for(var key in client){
-        if(key != 'id')         //skip id for now
+    for (var key in client) {
+        if (key != 'id')         //skip id for now
             clientValues.push(client[key])
     }
-        
+
     var curDateTime = getDateTime()
     clientValues.push(curDateTime)    //add date updated
     clientValues.push(userid)         //set id
 
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         this.getDAO().then(db => {
             //Do this seqeutially 
-            db.serialize(function(){
+            db.serialize(function () {
                 //Create client in db
-                db.run(querystr, clientValues, err =>{
-                if(err){
+                db.run(querystr, clientValues, err => {
+                    if (err) {
                         console.log(fname + funcname + err.message)
                         console.log(fname + funcname + err)
                         reject(err)
-                    } else{
+                    } else {
                         console.log(fname + funcname + "Client updated successfully")
                         resolve(err)
                     }
@@ -121,10 +121,9 @@ exports.updateClient = (client) => {
         }).catch(err => {
             console.error(err)
             console.error(err.message)
-            return err 
+            return err
         })
     })
-
 }
 
 

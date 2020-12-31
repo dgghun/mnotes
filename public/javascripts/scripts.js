@@ -26,24 +26,30 @@ function addClientToForm(client, trueOrFalse) {
                     continue
                 }
                 else if(x == 'dt_updated'){
-                    var dt = 'Last Update: ' + moment(client.dt_created).format('MM/DD/YYYY')
+                    var dt = 'Last Update: ' + moment(client.dt_updated).format('MM/DD/YYYY')
                     element.innerText = dt.trim()
                     continue
                 }
 
+                var inputType = element.type
                 element.value = client[x]
                 
                 //If disabling inputs, do this too
-                if(trueOrFalse){
+                if(trueOrFalse && inputType.indexOf('select') < 0){
                     element.innerText = client[x]
                     element.placeholder = ''
                 }
                 
-                var inputType = element.type
                 
 
-                if(inputType.indexOf('select') > -1)
+                if(inputType.indexOf('select') > -1){
                     element.disabled = trueOrFalse  //select input field
+                    
+                    //If on default select value and disabling, replace text
+                    if(element.options['selectedIndex'] == 0 && trueOrFalse){
+                        element.options[element.options['selectedIndex']].innerText = ""
+                    }
+                }
                 else
                     element.readOnly = trueOrFalse  // all other input fields
                 
