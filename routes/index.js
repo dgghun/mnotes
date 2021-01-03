@@ -14,6 +14,7 @@ router.post("/createNewClient", notes.createNewClient)  // add new client to db
 router.post("/viewClient", notes.viewClient)            // view Client page
 router.post("/editClient",notes.editClient)             // edit client
 router.post("/updateClient",notes.updateClient)             // update client
+router.post("/newNote",notes.newNote)                   //New Note page
 
 
 //DGG test error page

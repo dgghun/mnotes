@@ -12,7 +12,56 @@ const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
 
+exports.newNote = (req, res, next) => {
+   var funcname = 'newNote():'
+   var userid = req.body.userid
+   console.log(fname + funcname + "Userid = " + userid)
+   
+   database.retrieveClient(userid)
+   .then(client => {
+      if (client) {
+         var obj = new Object();
+         obj.message = 'Create New Note';           // preset default message
+         obj.firstName = client.firstName;                // client info
+         obj.lastName = client.lastName
+         obj.id = client.id
 
+         var str = JSON.stringify(obj);
+         res.render('newNote', JSON.parse(str))
+      }
+      else {
+         console.log(fname + funcname + " Userid " + userid + " not found.")
+         req.body = {
+            userid: userid,
+            doAlert: true,
+            pugMsg: 'clientNotFoundById',
+            alertMsg: 'Client not found: (id:' + userid + ')',
+            errorMsg: err.message
+         }
+
+         this.viewClient(req, res, next)
+      }
+   }).catch(err => {
+      console.log(fname + funcname + err)
+      req.body = {
+         userid: userid,
+         doAlert: true,
+         pugMsg: 'clientNotFoundById',
+         alertMsg: 'Client not found: (id:' + userid + ')',
+         errorMsg: err.message
+      }
+
+      this.viewClient(req, res, next)
+   })
+}
+
+
+/**
+ * Update a Clients Info
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
  exports.updateClient = (req, res, next) => {
    var funcname = 'updateClient():'
    var userid = req.body.id
@@ -25,7 +74,6 @@ const fname = "-->notes_controller.js:"    // file name for logging
    obj.title = app_name;
    obj.message = msg;                  // preset default header message
 
-   //TODO you are here
    database.updateClient(client)
    .then(err => {
       console.log(fname + funcname + " updated " + clientName)
@@ -38,13 +86,6 @@ const fname = "-->notes_controller.js:"    // file name for logging
       }
 
       this.viewClient(req, res, next)
-      // obj.doAlert = true;                 //do alert
-      // obj.pugMsg = 'clientUpdated'        //alert type
-      // obj.alertMsg = 'Updated ' +  clientName + '\'s info successfully!'
-      // obj.client = client;                // client info
-      
-      // var str = JSON.stringify(obj);
-      // res.render('clientHome',JSON.parse(str))
       
    })
    .catch(err => {

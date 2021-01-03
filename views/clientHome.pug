@@ -30,9 +30,11 @@ block content
             i.fa.fa-user
               span.fa-icon-text  Edit
       div.col-sm-2.mx-1.px-0
-        a.btn.btn-primary.btn-block(id='btnNewNote' type='button' role='button' href="#" data-toggle="tooltip" data-placement="top" title="Create a new note") 
-          i.fa.fa-pencil
-            span.fa-icon-text  New Note
+        form(id='formNewNote' role="form" method='POST' action="/newNote")
+          input(type="hidden" name='userid' value= client.id)
+          button.btn.btn-primary.btn-block(id='btnNewNote' type='submit' data-toggle="tooltip" data-placement="top" title="Create a new note") 
+            i.fa.fa-pencil
+              span.fa-icon-text  New Note
       div.col-sm-2.mx-1.px-0
         a.btn.btn-secondary.btn-block(id='btnHome' type='button' role='button' href="/userHome" data-toggle="tooltip" data-placement="top" title="Go to your home page") 
           i.fa.fa-home

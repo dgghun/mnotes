@@ -1,0 +1,37 @@
+div.form-row
+  div.form-group.col-3
+    label(for='date') Date
+    input(required type="date" id="date").form-control
+  div.form-group.col-sm-4
+    label(for="sessionHrs") Session Length
+    div.input-group
+        select(id="sessionHrs" name="sessionHrs").form-control.mr-1
+            option(value="0") 0 hrs
+            option(value="1" selected) 1 hr
+            option(value="2") 2 hrs
+            option(value="3") 3 hrs
+            option(value="4") 4 hrs
+            option(value="5") 5 hrs
+            option(value="6") 6 hrs
+            option(value="7") 7 hrs
+            option(value="8") 8 hrs
+            option(value="9") 9 hrs 
+        select(id="sessionMins" name="sessionMins").form-control 
+            option(value="00" selected) 00 mins
+            option(value="05") 05 mins
+            option(value="10") 10 mins
+            option(value="15") 15 mins
+            option(value="20") 20 mins
+            option(value="25") 25 mins
+            option(value="30") 30 mins
+            option(value="35") 35 mins
+            option(value="40") 40 mins
+            option(value="45") 45 mins
+            option(value="50") 50 mins
+            option(value="55") 55 mins
+  div.form-group.col
+    label(for='otherNames') Other Client Names
+    input(type='text' id='otherNames' name='otherNames' placeholder='John Dear, Jane Snow').form-control.toupper
+
+script.
+    document.getElementById('date').valueAsDate = new Date(); //set date input to current    

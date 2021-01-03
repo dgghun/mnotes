@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  //- sidebar.pug
+  include sidebar
+
+  //- Body
+  div.container.w3-animate-opacity
+    h1.display-3= message
+    a.btn.btn-secondary(type='button' role='button' href="/userHome") 
+        i.fa.fa-home
+          span.fa-icon-text  Home
+    
+    //- Form start
+    hr
+    p.lead Client Name: #{firstName} #{lastName} 
+    form(id='createNewNote' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
+      include noteForm
+      button(for='createNewNote' type='submit').btn.btn-primary 
+        i.fa.fa-plus
+          span.fa-icon-text  Save Note
+    hr
