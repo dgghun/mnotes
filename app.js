@@ -51,32 +51,6 @@ app.use('/users', usersRouter);
 dbController.initDB()
 
 
-    // dbController.dropTable(db,'Books')
-    // .then(db => {
-    //   const sql_create = `CREATE TABLE IF NOT EXISTS Books (
-    //   Book_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    //   Title VARCHAR(100) NOT NULL,
-    //   Author VARCHAR(100) NOT NULL,
-    //   Comments TEXT
-    //   );`;
-    
-    //   db.run(sql_create, err => {
-    //     if (err) {
-    //       return console.error(err.message);
-    //     }
-    //     console.log("Successful creation of the 'Books' table");
-    //   });
-    // })
-    // .catch(err => console.log(err))
-
-// const dbName = path.join(__dirname,"data","mnotes.db");
-// const db = new sqlite3.Database(dbName, err =>{
-//   if(err)
-//     return console.error(err.message)
-
-//   console.log("Successful connection to db: " + dbName);
-// });
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404)); //creates 404 error page

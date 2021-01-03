@@ -39,8 +39,6 @@ function addClientToForm(client, trueOrFalse) {
                     element.innerText = client[x]
                     element.placeholder = ''
                 }
-                
-                
 
                 if(inputType.indexOf('select') > -1){
                     element.disabled = trueOrFalse  //select input field

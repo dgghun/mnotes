@@ -2,19 +2,14 @@
 https://blog.pagesd.info/2019/10/08/crud-with-express-sqlite-10-steps/#crud6
 https://developerhowto.com/2018/12/29/build-a-rest-api-with-node-js-and-express-js/
 https://github.com/mapbox/node-sqlite3/wiki
+
+#Sessions info
+https://codeforgeek.com/manage-session-using-node-js-express-4/
 ###################################################################################
 ### TO-DO ###
 ###################################################################################
--Client CRUD Create #DONE
--Client CRUD Retrieve #DONE
--Client CRUD Update
 -Client CRUD Delete
--List 'Clients' in user landing #DONE
--Format names camal case for displaying on user landing #DONE
--Add ability to sort Clients list on user landing #DONE (search)
 -Add ability to delete a Client
--Add ability to edit client info
--Create Client landing page
 -Note CRUD Create
 -Note CRUD Retrieve
 -Note CRUD Update
@@ -24,10 +19,25 @@ https://github.com/mapbox/node-sqlite3/wiki
 -List 'Notes' in Client landing 
 -Scrub the 'Create Client' form inputs (ie, No SQL injections,no leading/trailing spaces)
 -Scrub the 'Create Note' form inputs (ie, No SQL injections, no leading/trailing spaces)
+-Sort/filter buttons on user landing page
 -Encrypt SQLite db data
 -Setup login with credentials 
--Create settings menu for user 
+-Create settings menu for user
+    *Loging credentials yes/no
+    *How to initial sort Clients on landing page
+    *Set auto time out to log out
 -Send user back to calling page if they try to POST or explicitly type a address route. See "catch all" in routes/index.js
+-Add a change log for user to view chronoloical changes
+    *write all changes to Change log
+    *add button to view the Change log in the sidebar
+-Create Client landing page #DONE
+-Client CRUD Create #DONE
+-Client CRUD Retrieve #DONE
+-Client CRUD Update #DONE
+-List 'Clients' in user landing #DONE
+-Format names camal case for displaying on user landing #DONE
+-Add ability to sort Clients list on user landing #DONE (search)
+-Add ability to edit client info #DONE
 
 ###################################################################################
 
