@@ -13,7 +13,7 @@ var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
 const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
-const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus,dt_created,dt_updated"
+const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus,dob,dt_created,dt_updated"
 const CLNT_INIT = "(" +
                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                   "firstName VARCHAR(100) NOT NULL," +
@@ -28,6 +28,7 @@ const CLNT_INIT = "(" +
                   "email VARCHAR(100)," +
                   "ethnicity VARCHAR(100)," +
                   "maritalStatus VARCHAR(100)," +
+                  "dob TEXT," +
                   "dt_created TEXT," +
                   "dt_updated TEXT" +
                   ");";
@@ -75,7 +76,7 @@ exports.initDB = () => {
         //Do these sequentially 
         db.serialize(function() {
             // For testing
-            // dropTable(db,CLNT_TABLE);
+            dropTable(db,CLNT_TABLE);
             // dropTable(db,NOTE_TABLE);
 
             createTable(db, CLNT_TABLE, CLNT_INIT)
@@ -85,6 +86,10 @@ exports.initDB = () => {
 }
 
 
+/**
+ * Update client 
+ * @param {*} client 
+ */
 exports.updateClient = (client) => {
     var funcname = 'updateClient():'
     var userid = client.id
@@ -128,7 +133,7 @@ exports.updateClient = (client) => {
 
 
 /**
- * Retrieces a single Client by id
+ * Retrieves a single Client by id
  * @param {*} userid - Client id
  */
 exports.retrieveClient = (userid) => {
@@ -213,15 +218,16 @@ exports.createClient = (newClient) => {
     
     console.log(fname + "createClient(): creating client ")
     var clientValues = [];
-    for(var key in newClient)
+    for(var key in newClient){
         clientValues.push(newClient[key])
+    }
         
     var curDateTime = getDateTime()
     clientValues.push(curDateTime)    //add created date
     clientValues.push(curDateTime)    //add created date
     var querystr = "INSERT INTO " + CLNT_TABLE + 
     "(" + CLNT_ROW + ")" +
-    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
     
     return new Promise((resolve,reject) => {
         this.getDAO().then(db => {

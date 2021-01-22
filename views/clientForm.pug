@@ -50,7 +50,11 @@ div.form-row
       option(value="Widowed") Widowed
       option(value="Separated") Separated
       option(value="Divorced") Divorced
-
+div.form-row
+  div.form-group.col-4
+    label(for='dob') DOB
+    input(required type="date" id="dob" name="dob").form-control
+    
 script.
   checkPhone('phone')
   checkName('firstName')

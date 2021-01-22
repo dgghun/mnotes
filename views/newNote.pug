@@ -17,7 +17,7 @@ block content
     p.lead Client Name: #{firstName} #{lastName} 
     form(id='createNewNote' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
       include noteForm
-      button(for='createNewNote' type='submit').btn.btn-primary 
+      button(for='createNewNote' type='button').btn.btn-primary 
         i.fa.fa-plus
           span.fa-icon-text  Save Note
     hr
