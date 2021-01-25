@@ -6,7 +6,7 @@ if pugMsg == 'clientAdded' || 'clientUpdated'
     i.fa.fa-exclamation-circle.fa-lg 
       span.fa-icon-text   #{alertMsg}
 
-if pugMsg == 'clientAddedError'
+if pugMsg == 'clientAddedError' || pugMsg == 'clientUpdateError'
   - doAlert = true
   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
     i.fa.fa-exclamation-circle.fa-lg 
