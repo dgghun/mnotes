@@ -20,6 +20,7 @@
     "morgan": "~1.9.1",
     "popper.js": "^1.16.1",
     "pug": "^3.0.0",
+    "selectize": "^0.12.6",
     "serve-favicon": "^2.5.0",
     "sqlite3": "^5.0.0"
   },

@@ -8,13 +8,20 @@ block content
   //- Body
   div.container.w3-animate-opacity
     h1.display-3= message
-    a.btn.btn-secondary(type='button' role='button' href="/userHome") 
-        i.fa.fa-home
-          span.fa-icon-text  Home
+
+    //- Buttons
+    div.row
+      div.col-sm-2.ml-3.mr-1.px-0
+        form(id='formCancelNewNote' role="form" method='POST' action="/viewClient")
+          input(type="hidden" id='userid' name='userid' value= id)
+          button.btn.btn-danger.btn-block(id='btnCancel' type='submit' data-toggle="tooltip" data-placement="top" title="Cancel Note.") 
+            i.fa.fa-times
+              span.fa-icon-text  Cancel
     
     //- Form start
     hr
-    p.lead Client Name: #{firstName} #{lastName} 
+    p.lead Client Name: 
+      span.toupper(id='clientFullName') #{firstName} #{lastName} 
     form(id='createNewNote' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
       include noteForm
       button(for='createNewNote' type='button').btn.btn-primary 

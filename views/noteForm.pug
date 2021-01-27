@@ -32,6 +32,18 @@ div.form-row
   div.form-group.col
     label(for='otherNames') Other Client Names
     input(type='text' id='otherNames' name='otherNames').form-control.toupper
+div.form-row
+  div.form-group.col-md
+    label(for="chiefComplaint") Chief Complaint
+    textarea(id="chiefComplaint" name="chiefComplaint" rows="3").form-control
+div.form-row
+  div.form-group.col-md
+    label(for="clientExchanges") Client’s Interpersonal and/or Verbal Exchanges (Objective)
+    textarea(id="clientExchanges" name="clientExchanges" rows="3").form-control
+
+p.lead Therapist’s Observation/MSE (Subjective):
+
+
 
 script.
     document.getElementById('date').valueAsDate = new Date(); //set date input to current    

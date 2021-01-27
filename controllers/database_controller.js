@@ -77,7 +77,7 @@ exports.initDB = () => {
         //Do these sequentially 
         db.serialize(function() {
             // For testing
-            dropTable(db,CLNT_TABLE);
+            // dropTable(db,CLNT_TABLE);
             // dropTable(db,NOTE_TABLE);
 
             createTable(db, CLNT_TABLE, CLNT_INIT)
