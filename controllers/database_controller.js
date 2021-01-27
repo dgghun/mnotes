@@ -44,6 +44,7 @@ const CLNT_UPDATE = "firstName = ?, " +
                     "email = ?, " +
                     "ethnicity = ?, " +
                     "maritalStatus = ?, " +
+                    "dob = ?, " +
                     "dt_updated = ?" 
 
 /**
