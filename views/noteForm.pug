@@ -43,7 +43,27 @@ div.form-row
 
 p.lead Therapist’s Observation/MSE (Subjective):
 
-
+div.form-row
+  div.form-group.col-md
+    label(for="appearance") Appearance/Hygiene
+    select(id="appearance" multiple)
+      option(value="test1") test1
+      option(value="test2") test2
+      option(value="test3") test3
+      option(value="test4") test4
 
 script.
-    document.getElementById('date').valueAsDate = new Date(); //set date input to current    
+  document.getElementById('date').valueAsDate = new Date(); //set date input to current    
+
+  $('#appearance').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+  });
+
