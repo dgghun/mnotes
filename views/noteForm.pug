@@ -44,26 +44,106 @@ div.form-row
 p.lead Therapist’s Observation/MSE (Subjective):
 
 div.form-row
+  div.form-group.col-2
+    p.pt-1 Appearance:
   div.form-group.col-md
-    label(for="appearance") Appearance/Hygiene
-    select(id="appearance" multiple)
-      option(value="test1") test1
-      option(value="test2") test2
-      option(value="test3") test3
-      option(value="test4") test4
+    input(type="text" id="appearance" name="appearance").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Psychomotor:
+  div.form-group.col-md
+    input(type="text" id="psychomotor" name="psychomotor").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Mood:
+  div.form-group.col-md
+    input(type="text" id="mood" name="mood").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Affect:
+  div.form-group.col-md
+    input(type="text" id="affect" name="affect").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Speech:
+  div.form-group.col-md
+    input(type="text" id="speech" name="speech").selectized.form-control    
 
 script.
   document.getElementById('date').valueAsDate = new Date(); //set date input to current    
 
-  $('#appearance').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-        return {
-            value: input,
-            text: input
-        }
-    }
-  });
+  //- adds input options to selectize input field
+  function addSelectizeInput(tagid, opts){
+    $('#' + tagid).selectize({
+      plugins: ['remove_button'],
+      options: opts,
+      labelField: 'value',
+      placeholder: 'Select from list or type your own description...',
+      delimiter: ',',
+      persist: false,
+      create: function(input) {
+          return {
+              value: input,
+              text: input
+          }
+      }
+    });
+  }
 
+  var speechOpt = [
+      {value: 'Soft'},
+      {value: 'Loud'},
+      {value: 'Rapid'},
+      {value: 'Expressive'},
+      {value: 'Stilted'},
+      {value: 'Poverty'},
+      {value: 'These are normal for client'},
+    ]
+  addSelectizeInput('speech', speechOpt)
+
+  var affectOpt = [
+      {value: 'WNR'}, 
+      {value: 'Full'}, 
+      {value: 'Appropriate'}, 
+      {value: 'Inappropriate'}, 
+      {value: 'Smiling'}, 
+      {value: 'Laughter'}, 
+      {value: 'Congruent With Mood'}, 
+      {value: 'Restricted'}, 
+      {value: 'Flat'}, 
+      {value: 'Tearful'},
+      {value: 'Dramatic'}, 
+    ]
+  addSelectizeInput('affect',affectOpt)
+
+  var moodOpt = [
+      {value: 'WNR'}, 
+      {value: 'Bright'},
+      {value: 'Anxious'},
+      {value: 'Tense'},
+      {value: 'Panicky'},
+      {value: 'Sad'},
+      {value: 'Sullen'},
+      {value: 'Depressed'},
+      {value: 'Despondent'},
+      {value: 'Dysphoric'},
+      {value: 'Angry'},
+      {value: 'Euphoric'},
+      {value: 'Expansive'},
+    ]
+  addSelectizeInput('mood',moodOpt)
+
+  var psychomotorOpts = [
+      {value: 'WNR'},
+      {value: 'Lethargic'},
+      {value: 'Agitated'},
+    ]
+  addSelectizeInput('psychomotor',psychomotorOpts)
+
+  var appearanceOpts = [
+      {value: 'Well Groomed'},
+      {value: 'Adequate'},
+      {value: 'Inadequate'},
+    ]
+  addSelectizeInput('appearance',appearanceOpts)
+  
