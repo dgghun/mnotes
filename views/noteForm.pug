@@ -147,3 +147,23 @@ script.
     ]
   addSelectizeInput('appearance',appearanceOpts)
   
+
+  //- TODO user below code as template to populate selectize items in input on page load
+  //- ...probably useful on 'EDIT NOTE' page 
+  //- var testopt = {
+  //-     plugins: ['remove_button'],
+  //-     options: moodOpt,
+  //-     labelField: 'value',
+  //-     placeholder: 'Select from list or type your own description...',
+  //-     delimiter: ',',
+  //-     persist: false,
+  //-     create: function(input) {
+  //-         return {
+  //-             value: input,
+  //-             text: input
+  //-         }
+  //-     }
+  //-   }
+  //- var $select = $('#mood').selectize(testopt);
+  //- var selectize = $select[0].selectize
+  //- selectize.setValue(['Angry','Tense','Sad'], false)
