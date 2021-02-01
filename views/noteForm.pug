@@ -68,6 +68,41 @@ div.form-row
     p.pt-1 Speech:
   div.form-group.col-md
     input(type="text" id="speech" name="speech").selectized.form-control    
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Thoughts:
+  div.form-group.col-md
+    input(type="text" id="thoughts" name="thoughts").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Insight:
+  div.form-group.col-md
+    input(type="text" id="insight" name="insight").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Judgment:
+  div.form-group.col-md
+    input(type="text" id="judgment" name="judgment").selectized.form-control
+div.form-row
+  div.form-group.col-2
+    p.pt-1 Eye Contact:
+  div.form-group.col-md
+    input(type="text" id="eyecontact" name="eyecontact").selectized.form-control    
+div.form-row
+  div.form-group.col-auto
+    p.pt-1 Suicidal/Homicidal Ideation:
+  div.form-group.col-md
+    input(type="text" id="shideation" name="shideation").selectized.form-control    
+
+div.form-row
+  div.form-group.col-md
+    label(for="goalProgress") Progress Towards Goal(s)
+    textarea(id="goalProgress" name="goalProgress" rows="3").form-control
+
+div.form-row
+  div.form-group.col-md
+    label(for="interventions") Interventions Used
+    input(type="text" id="interventions" name="interventions").selectized.form-control
 
 script.
   document.getElementById('date').valueAsDate = new Date(); //set date input to current    
@@ -89,6 +124,56 @@ script.
       }
     });
   }
+
+  var interventionsOpts = [
+    {value: 'Insight-Oriented'},
+    {value: 'Supportive'},
+    {value: 'CBT'},
+    {value: 'Crisis Intervention/Trauma work'},
+    {value: 'Grief workEnergy Psychology: EFT/tapping'},
+    {value: 'Grief workEnergy Psychology: Biofield and chakra treatments'},
+    {value: 'Grief workEnergy Psychology: Energy corrections'},
+    {value: 'Mindfulness techniques: Deep breathing'},
+    {value: 'Mindfulness techniques: Guided meditations'},
+    {value: 'Mindfulness techniques: Progressive muscle relaxation'},
+    {value: 'Mindfulness techniques: Staying present'},
+    {value: 'Mindfulness techniques: Use of loving-kindness towards self/others'},
+    {value: 'Hypnosis'},
+  ]
+  addSelectizeInput('interventions',interventionsOpts)
+
+  var shideationOpts = [
+    {value: 'None'},
+    {value: 'Fleeting'},
+    {value: 'Plan/Intent-YES'},
+    {value: 'Plan/Intent-NO'},
+    {value: 'Contracts for Safety-YES'},
+    {value: 'Contracts for Safety-NO'},
+  ]
+  addSelectizeInput('shideation',shideationOpts)
+
+  var eyecontactOpts = [
+    {value: 'WNR'},
+    {value: 'Minimal'},
+    {value: 'Poor'},
+  ]
+  addSelectizeInput('eyecontact',eyecontactOpts)
+
+  var jugdmentOpts = [
+    {value: 'Poor'},
+    {value: 'Fair'},
+    {value: 'Good'},
+    {value: 'Excellent'},
+  ]
+  addSelectizeInput('judgment',jugdmentOpts)
+
+  var insightOpts = [
+    {value: 'Poor'},
+    {value: 'Fair'},
+    {value: 'Good'},
+    {value: 'Excellent'},
+  ]
+  addSelectizeInput('insight',insightOpts)
 
   var speechOpt = [
       {value: 'Soft'},
@@ -146,7 +231,16 @@ script.
       {value: 'Inadequate'},
     ]
   addSelectizeInput('appearance',appearanceOpts)
-  
+
+  var thoughtsOpts = [
+    {value: 'Organized'},   
+    {value: 'Circumstantial'},
+    {value: 'Tangential'},
+    {value: 'Disorganized'},  
+    {value: 'Illogical'},  
+    {value: 'Paranoid'},
+  ]  
+  addSelectizeInput('thoughts',thoughtsOpts)
 
   //- TODO user below code as template to populate selectize items in input on page load
   //- ...probably useful on 'EDIT NOTE' page 
