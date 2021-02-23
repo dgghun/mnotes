@@ -104,7 +104,15 @@ div.form-row
     label(for="interventions") Interventions Used
     input(type="text" id="interventions" name="interventions").selectized.form-control
 
+div.form-row
+  div.form-group.col-md
+    label(for="diagnosis") Diagnosis
+    input(type="text" id="diagnosis" name="diagnosis").selectized.form-control
+
+
 script.
+  const icd10_data = !{JSON.stringify(icd10Data)}
+
   document.getElementById('date').valueAsDate = new Date(); //set date input to current    
 
   //- adds input options to selectize input field
@@ -124,6 +132,16 @@ script.
       }
     });
   }
+
+
+  var diagnosisOpts =[]
+  for(var i in icd10_data){
+    var tmp = {
+      value: icd10_data[i].Description + " - " + icd10_data[i].Code
+    }
+    diagnosisOpts.push(tmp)
+  }
+  addSelectizeInput('diagnosis',diagnosisOpts)
 
   var interventionsOpts = [
     {value: 'Insight-Oriented'},

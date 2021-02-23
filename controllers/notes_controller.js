@@ -5,6 +5,7 @@
  */
 let landing = require("../controllers/landing_controller")
 let database = require("../controllers/database_controller")
+const icd10_data = require('../data/ICD10-Codes.json')  //icd10 diagnosis codes 
 const { data } = require("jquery")
 
 const app_name = "mnotes" 
@@ -25,7 +26,8 @@ exports.newNote = (req, res, next) => {
          obj.firstName = client.firstName;                // client info
          obj.lastName = client.lastName
          obj.id = client.id
-
+         obj.icd10Data = icd10_data                //icd10 diagnosis codes
+         
          var str = JSON.stringify(obj);
          res.render('newNote', JSON.parse(str))
       }
