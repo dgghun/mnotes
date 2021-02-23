@@ -4,13 +4,17 @@
  * Description: generic app scripts
  */
 
-
+/**
+ * Adds/initializes fields for a new note on the newNote.pug view. 
+ * Selectize options are hardcoded here for now, but need to moved to 
+ * a config/data file. 
+ */
 function addNewNoteOptions() {
 
     document.getElementById('date').valueAsDate = new Date(); //set date input to current
 
-    //- Use below code for selectize input field. Currently using datalist 
-    //- const icd10_data = !{JSON.stringify(icd10Data)}
+    //- **** Use below code for selectize input field. Currently using datalist **** -//
+    //- const icd10_data = !{JSON.stringify(icd10Data)}     //passed to Pug file. Will need to pass to this function if used
     //- var diagnosisOpts =[]
     //- for(var i in icd10_data){
     //-   var tmp = {
@@ -140,7 +144,7 @@ function addNewNoteOptions() {
 
 
 /**
- * Adds selectize selectable buttons to text input field
+ * Adds selectize multi selectable tags/text to text input field
  * @param {*} tagid - html tag id 
  * @param {*} opts  - selectize options/values 
  */

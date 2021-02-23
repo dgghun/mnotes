@@ -13,6 +13,21 @@ const fname = "-->notes_controller.js:"    // file name for logging
 
  /**EXPORT FUNCTIONS */
 
+exports.createNewNote = (req, res, next) => {
+   var funcname = fname + 'createNewNote():'
+   var userid = req.body.userid
+   console.log(funcname + 'Userid=' + userid)
+
+   console.log(req.body)
+}
+
+
+/**
+ * Create a new note
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.newNote = (req, res, next) => {
    var funcname = 'newNote():'
    var userid = req.body.userid

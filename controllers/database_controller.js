@@ -13,6 +13,32 @@ var fname = "-->database_controller.js:"
 const DBNAME = path.join(__dirname,'../data', 'mnotes.db')
 const CLNT_TABLE = 'Clients'
 const NOTE_TABLE = 'Notes'
+const NOTE_ROW = "clientid,date,sessionHrs,sessionMins,otherNames,chiefComplaint,clientExchanges,appearance,psychomotor,mood,affect,speech,thoughts,insight,judgment,eyecontact,shideation,goalProgress,interventions,diagnosis,treatmentPlan,dt_created"
+const NOTE_INIT = "(" +
+                  "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                  "clientid INTEGER NOT NULL," +
+                  "date TEXT NOT NULL," +
+                  "sessionHrs TEXT," +
+                  "sessionMins TEXT," +
+                  "otherNames TEXT," +
+                  "chiefComplaint TEXT," +
+                  "clientExchanges TEXT," +
+                  "appearance TEXT," +
+                  "psychomotor TEXT," +
+                  "mood TEXT," +
+                  "affect TEXT," +
+                  "speech TEXT," +
+                  "thoughts TEXT," +
+                  "insight TEXT," +
+                  "judgment TEXT," +
+                  "eyecontact TEXT," +
+                  "shideation TEXT," +
+                  "goalProgress TEXT," +
+                  "interventions TEXT," +
+                  "diagnosis TEXT," +
+                  "treatmentPlan TEXT," +
+                  "dt_created TEXT" +
+                  ");";
 const CLNT_ROW = "firstName,lastName,middleName,address1,address2,city,state,zip,phone,email,ethnicity,maritalStatus,dob,dt_created,dt_updated"
 const CLNT_INIT = "(" +
                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -81,6 +107,7 @@ exports.initDB = () => {
             // dropTable(db,NOTE_TABLE);
 
             createTable(db, CLNT_TABLE, CLNT_INIT)
+            createTable(db, NOTE_TABLE, NOTE_INIT)
             closeDAO(db);
         })
     }).catch(err => console.error(err))
@@ -210,6 +237,45 @@ exports.retrieveClients = () => {
     })
 }
 
+exports.createNote = (newNote) => {
+    var funcname = fname + 'createNote():'
+    console.log(funcname + " creating note")
+
+    var noteValues = []
+    for (var key in newNote) {
+        noteValues.push(newNote[key])
+    }
+
+    noteValues.push(getDateTime())  //add date created
+
+    var querystr = "INSERT INTO " + NOTE_TABLE +
+        "(" + NOTE_ROW + ")" +
+        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+
+    return new Promise((resolve, reject) => {
+        this.getDAO().then(db => {
+            //Do this seqeutially 
+            db.serialize(function () {
+                //Create note in db
+                db.run(querystr, noteValues, err => {
+                    if (err) {
+                        console.log(funcname + err.message)
+                        console.log(funcname + err)
+                        reject(err)
+                    } else {
+                        console.log(funcname + " Note added successfully")
+                        resolve(err)
+                    }
+                })
+                closeDAO(db);
+            })
+        }).catch(err => {
+            console.error(err)
+            console.error(err.message)
+            return err
+        })
+    })
+}
 
 /**
  * Adds a Client to db
@@ -306,7 +372,7 @@ function createTable(db,tableName, tableQuery){
             console.error(err.message);
             return err
         }
-        console.log("Successful creation of the "+ CLNT_TABLE +" table");
+        console.log("Successful creation of the "+ tableName +" table");
     });
 }
 

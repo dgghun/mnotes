@@ -15,6 +15,7 @@ router.post("/viewClient", notes.viewClient)            // view Client page
 router.post("/editClient",notes.editClient)             // edit client
 router.post("/updateClient",notes.updateClient)             // update client
 router.post("/newNote",notes.newNote)                   //New Note page
+router.post("/createNewNote",notes.createNewNote)                   //New Note page
 
 
 //DGG test error page

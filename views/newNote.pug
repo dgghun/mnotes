@@ -22,9 +22,10 @@ block content
     hr
     p.lead Client Name: 
       span.toupper(id='clientFullName') #{firstName} #{lastName} 
-    form(id='createNewNote' role='form' method="POST" action="#" onsubmit="return confirm('Everything look okay before saving?');")
+    form(id='createNewNote' role='form' method="POST" action="/createNewNote" onsubmit="return confirm('Everything look okay before saving?');")
+      input(type="hidden" id='clientid' name='clientid' value= id)
       include noteForm
-      button(for='createNewNote' type='button').btn.btn-primary 
+      button(id='btnCreateNewNote' for='createNewNote' type='submit').btn.btn-primary 
         i.fa.fa-plus
           span.fa-icon-text  Save Note
     hr
