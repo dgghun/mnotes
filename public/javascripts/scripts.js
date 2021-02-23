@@ -5,6 +5,163 @@
  */
 
 
+function addNewNoteOptions() {
+
+    document.getElementById('date').valueAsDate = new Date(); //set date input to current
+
+    //- Use below code for selectize input field. Currently using datalist 
+    //- const icd10_data = !{JSON.stringify(icd10Data)}
+    //- var diagnosisOpts =[]
+    //- for(var i in icd10_data){
+    //-   var tmp = {
+    //-     value: icd10_data[i].Description + " - " + icd10_data[i].Code
+    //-   }
+    //-   diagnosisOpts.push(tmp)
+    //- }
+    //- addSelectizeInput('diagnosis',diagnosisOpts)
+
+    var interventionsOpts = [
+        { value: 'Insight-Oriented' },
+        { value: 'Supportive' },
+        { value: 'CBT' },
+        { value: 'Crisis Intervention/Trauma work' },
+        { value: 'Grief workEnergy Psychology: EFT/tapping' },
+        { value: 'Grief workEnergy Psychology: Biofield and chakra treatments' },
+        { value: 'Grief workEnergy Psychology: Energy corrections' },
+        { value: 'Mindfulness techniques: Deep breathing' },
+        { value: 'Mindfulness techniques: Guided meditations' },
+        { value: 'Mindfulness techniques: Progressive muscle relaxation' },
+        { value: 'Mindfulness techniques: Staying present' },
+        { value: 'Mindfulness techniques: Use of loving-kindness towards self/others' },
+        { value: 'Hypnosis' },
+    ]
+    addSelectizeInput('interventions', interventionsOpts)
+
+    var shideationOpts = [
+        { value: 'None' },
+        { value: 'Fleeting' },
+        { value: 'Plan/Intent-YES' },
+        { value: 'Plan/Intent-NO' },
+        { value: 'Contracts for Safety-YES' },
+        { value: 'Contracts for Safety-NO' },
+    ]
+    addSelectizeInput('shideation', shideationOpts)
+
+    var eyecontactOpts = [
+        { value: 'WNR' },
+        { value: 'Minimal' },
+        { value: 'Poor' },
+    ]
+    addSelectizeInput('eyecontact', eyecontactOpts)
+
+    var jugdmentOpts = [
+        { value: 'Poor' },
+        { value: 'Fair' },
+        { value: 'Good' },
+        { value: 'Excellent' },
+    ]
+    addSelectizeInput('judgment', jugdmentOpts)
+
+    var insightOpts = [
+        { value: 'Poor' },
+        { value: 'Fair' },
+        { value: 'Good' },
+        { value: 'Excellent' },
+    ]
+    addSelectizeInput('insight', insightOpts)
+
+    var speechOpt = [
+        { value: 'Soft' },
+        { value: 'Loud' },
+        { value: 'Rapid' },
+        { value: 'Expressive' },
+        { value: 'Stilted' },
+        { value: 'Poverty' },
+        { value: 'These are normal for client' },
+    ]
+    addSelectizeInput('speech', speechOpt)
+
+    var affectOpt = [
+        { value: 'WNR' },
+        { value: 'Full' },
+        { value: 'Appropriate' },
+        { value: 'Inappropriate' },
+        { value: 'Smiling' },
+        { value: 'Laughter' },
+        { value: 'Congruent With Mood' },
+        { value: 'Restricted' },
+        { value: 'Flat' },
+        { value: 'Tearful' },
+        { value: 'Dramatic' },
+    ]
+    addSelectizeInput('affect', affectOpt)
+
+    var moodOpt = [
+        { value: 'WNR' },
+        { value: 'Bright' },
+        { value: 'Anxious' },
+        { value: 'Tense' },
+        { value: 'Panicky' },
+        { value: 'Sad' },
+        { value: 'Sullen' },
+        { value: 'Depressed' },
+        { value: 'Despondent' },
+        { value: 'Dysphoric' },
+        { value: 'Angry' },
+        { value: 'Euphoric' },
+        { value: 'Expansive' },
+    ]
+    addSelectizeInput('mood', moodOpt)
+
+    var psychomotorOpts = [
+        { value: 'WNR' },
+        { value: 'Lethargic' },
+        { value: 'Agitated' },
+    ]
+    addSelectizeInput('psychomotor', psychomotorOpts)
+
+    var appearanceOpts = [
+        { value: 'Well Groomed' },
+        { value: 'Adequate' },
+        { value: 'Inadequate' },
+    ]
+    addSelectizeInput('appearance', appearanceOpts)
+
+    var thoughtsOpts = [
+        { value: 'Organized' },
+        { value: 'Circumstantial' },
+        { value: 'Tangential' },
+        { value: 'Disorganized' },
+        { value: 'Illogical' },
+        { value: 'Paranoid' },
+    ]
+    addSelectizeInput('thoughts', thoughtsOpts)
+}
+
+
+/**
+ * Adds selectize selectable buttons to text input field
+ * @param {*} tagid - html tag id 
+ * @param {*} opts  - selectize options/values 
+ */
+function addSelectizeInput(tagid, opts) {
+    $('#' + tagid).selectize({
+        plugins: ['remove_button'],
+        options: opts,
+        labelField: 'value',
+        placeholder: 'Select from list or type your own description...',
+        delimiter: ',',
+        persist: false,
+        create: function (input) {
+            return {
+                value: input,
+                text: input
+            }
+        }
+    });
+}
+ 
+
 /**
  * Add client info to client form
  * @param {JSON} client - client JSON string
