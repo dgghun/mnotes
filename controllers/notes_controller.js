@@ -15,10 +15,26 @@ const fname = "-->notes_controller.js:"    // file name for logging
 
 exports.createNewNote = (req, res, next) => {
    var funcname = fname + 'createNewNote():'
-   var userid = req.body.userid
-   console.log(funcname + 'Userid=' + userid)
+   var clientid = req.body.clientid
+   console.log(funcname + 'client id = ' + clientid)
 
-   console.log(req.body)
+   database.createNote(req.body)
+    .then(err => {
+      console.log(funcname + "note added for id = " + clientid)
+      req.body = {
+         message: 'noteAdded'
+      }
+      
+      
+   })
+   .catch(err => {
+      console.log(funcname + err)
+      req.body = {
+         message: 'noteAddedError',
+         errormessage: err.message
+      }
+      
+   })
 }
 
 
