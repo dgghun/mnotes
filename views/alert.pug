@@ -1,12 +1,33 @@
 - var doAlert = false
+- var alertType = ''
+- var ALERT_GRN = 'ALERT_GRN'
+- var ALERT_RED = 'ALERT_RED'
 
-if pugMsg == 'clientAdded' || 'clientUpdated'
+case pugMsg
+  when 'noteAdded'
+    - alertType = ALERT_GRN 
+  when 'clientAdded'
+    - alertType = ALERT_GRN 
+  when 'clientUpdated'
+    - alertType = ALERT_GRN 
+  when 'clientUpdateError'
+    - alertType = ALERT_RED 
+  when 'clientAddedError'
+    - alertType = ALERT_RED 
+  when 'noteAddedError'
+    - alertType = ALERT_RED 
+  when 'clientNotFoundById'
+    - alertType = ALERT_RED 
+  when 'routeError'
+    - alertType = ALERT_RED
+
+if alertType == ALERT_GRN
   - doAlert = true
   div.alert.alert-success.alertstyle(role="alert" id='alert') 
     i.fa.fa-exclamation-circle.fa-lg 
       span.fa-icon-text   #{alertMsg}
 
-if pugMsg == 'clientAddedError' || pugMsg == 'clientUpdateError'
+if alertType == ALERT_RED
   - doAlert = true
   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
     i.fa.fa-exclamation-circle.fa-lg 
@@ -14,13 +35,27 @@ if pugMsg == 'clientAddedError' || pugMsg == 'clientUpdateError'
     hr
     p #{errorMsg}      
 
-if pugMsg == 'clientNotFoundById' || pugMsg == 'routeError'
-  - doAlert = true
-  div.alert.alert-danger.alertstyle(role="alert" id='alert') 
-    i.fa.fa-exclamation-circle.fa-lg 
-      span.fa-icon-text   #{alertMsg}
-    hr
-    p #{errorMsg}      
+//- if pugMsg == 'clientAdded' || 'clientUpdated' || 'noteAdded'
+//-   - doAlert = true
+//-   div.alert.alert-success.alertstyle(role="alert" id='alert') 
+//-     i.fa.fa-exclamation-circle.fa-lg 
+//-       span.fa-icon-text   #{alertMsg}
+
+//- if pugMsg == 'clientAddedError' || pugMsg == 'clientUpdateError' || 'noteAddedError'
+//-   - doAlert = true
+//-   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
+//-     i.fa.fa-exclamation-circle.fa-lg 
+//-       span.fa-icon-text   #{alertMsg}
+//-     hr
+//-     p #{errorMsg}      
+
+//- if pugMsg == 'clientNotFoundById' || pugMsg == 'routeError'
+//-   - doAlert = true
+//-   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
+//-     i.fa.fa-exclamation-circle.fa-lg 
+//-       span.fa-icon-text   #{alertMsg}
+//-     hr
+//-     p #{errorMsg}      
     
 if doAlert  
   script.

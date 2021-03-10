@@ -17,24 +17,30 @@ exports.createNewNote = (req, res, next) => {
    var funcname = fname + 'createNewNote():'
    var clientid = req.body.clientid
    console.log(funcname + 'client id = ' + clientid)
-
+   
    database.createNote(req.body)
-    .then(err => {
+   .then(err => {
       console.log(funcname + "note added for id = " + clientid)
       req.body = {
-         message: 'noteAdded'
+         userid: clientid,
+         doAlert: true,
+         pugMsg: 'noteAdded',
+         alertMsg: 'Note Added Successfully!'
       }
-      
-      
+      this.viewClient(req, res, next)
    })
    .catch(err => {
       console.log(funcname + err)
       req.body = {
-         message: 'noteAddedError',
-         errormessage: err.message
+         userid: clientid,
+         doAlert: true,
+         pugMsg: 'noteAddedError',
+         alertMsg: 'Error Adding Note.',
+         errorMsg: err.message
       }
-      
+      this.viewClient(req, res, next)
    })
+   
 }
 
 
@@ -194,7 +200,7 @@ exports.editClient = (req, res, next) => {
  * @param {*} next 
  */
 exports.viewClient = (req, res, next) => {
-   var funcname = "retrieveClient():"
+   var funcname = "viewClient():"
    var userid = req.body.userid
    console.log(fname + funcname + "Userid = " + userid)
    
