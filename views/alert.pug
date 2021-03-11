@@ -35,28 +35,6 @@ if alertType == ALERT_RED
     hr
     p #{errorMsg}      
 
-//- if pugMsg == 'clientAdded' || 'clientUpdated' || 'noteAdded'
-//-   - doAlert = true
-//-   div.alert.alert-success.alertstyle(role="alert" id='alert') 
-//-     i.fa.fa-exclamation-circle.fa-lg 
-//-       span.fa-icon-text   #{alertMsg}
-
-//- if pugMsg == 'clientAddedError' || pugMsg == 'clientUpdateError' || 'noteAddedError'
-//-   - doAlert = true
-//-   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
-//-     i.fa.fa-exclamation-circle.fa-lg 
-//-       span.fa-icon-text   #{alertMsg}
-//-     hr
-//-     p #{errorMsg}      
-
-//- if pugMsg == 'clientNotFoundById' || pugMsg == 'routeError'
-//-   - doAlert = true
-//-   div.alert.alert-danger.alertstyle(role="alert" id='alert') 
-//-     i.fa.fa-exclamation-circle.fa-lg 
-//-       span.fa-icon-text   #{alertMsg}
-//-     hr
-//-     p #{errorMsg}      
-    
 if doAlert  
   script.
     window.setTimeout(function() {
