@@ -108,6 +108,7 @@ exports.initDB = () => {
 
             createTable(db, CLNT_TABLE, CLNT_INIT)
             createTable(db, NOTE_TABLE, NOTE_INIT)
+            
             closeDAO(db);
         })
     }).catch(err => console.error(err))
@@ -237,6 +238,47 @@ exports.retrieveClients = () => {
     })
 }
 
+
+/**
+ * Retrieve Notes
+ */
+exports.retrieveNotes = (clientId) => {
+    const funcname = fname + 'retrieveNotes():'
+    const querystr = "SELECT * FROM " + NOTE_TABLE + " WHERE clientid = ?";
+    console.log(funcname + "retrieving notes for clientId:" + clientId)
+
+    return new Promise((resolve, reject) =>{
+        this.getDAO().then(db => {
+            //Do this sequentially
+            db.serialize(function () {
+                db.all(querystr, clientId, (err, rows) => {
+                    if (err) {
+                        console.log(funcname + err.message)
+                        console.log(funcname + err)
+                        reject(err)
+                        return
+                    }
+                    console.log(funcname + "Notes retrieved successfully for clientId" + clientId)
+                    console.log(rows)
+                    resolve(rows)
+                    return
+                })
+                closeDAO(db);
+            })
+        }).catch(err => {
+            console.error(err)
+            console.error(err.message)
+            return err
+        })
+    })
+}
+
+
+/**
+ * Create/insert a new note
+ * @param {*} newNote 
+ * @returns 
+ */
 exports.createNote = (newNote) => {
     var funcname = fname + 'createNote():'
     console.log(funcname + " creating note")
