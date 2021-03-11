@@ -107,7 +107,7 @@ div.form-row
 div.form-row
   div.form-group.col-md
     label(for="diagnosis") Diagnosis
-    //- Use for slectize -// input(type="text" id="diagnosis" name="diagnosis").selectized.form-control
+    //- Use for selectize -// input(type="text" id="diagnosis" name="diagnosis").selectized.form-control
     input(list="icd10data" id="diagnosis" name="diagnosis" placeholder="Type to search... ").form-control
     datalist(id="icd10data" )
       each i in icd10Data

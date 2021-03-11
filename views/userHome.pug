@@ -43,9 +43,11 @@ block content
                       p.text-muted Last Update: 
                         updated(id= userid) #{client.dt_updated}
                     div.col-sm-3
-                      a.btn.btn-primary.btn-block(type='button' role='button' href='#')
-                        i.fa.fa-pencil
-                          span.fa-icon-text  New Note
+                      form(id='formNewNote' role="form" method='POST' action="/newNote")
+                        input(type="hidden" id="userid" name='userid' value= userid)
+                        button.btn.btn-primary.btn-block(id='btnNewNote' type='submit' data-toggle="tooltip" data-placement="top" title="Create a new note")
+                          i.fa.fa-pencil
+                            span.fa-icon-text  New Note
                   div.row
                     div.col-sm-9
                       h5.card-title
@@ -53,9 +55,14 @@ block content
                     div.col-sm-3
                       form(role='form' method="POST" action="/viewClient")
                         input(type="hidden" name='userid' value= userid)
-                        button.btn.btn-secondary.btn-block(type='submit')
+                        button.btn.btn-secondary.btn-block(type='submit' data-toggle="tooltip" data-placement="top" title="View this clients record")
                           i.fa.fa-user
                             span.fa-icon-text  View Client
                 
-
+append foot
+  script.
+    //- enable bootstrap tooltips (Enable tooltips everywhere)
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   
