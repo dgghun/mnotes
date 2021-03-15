@@ -259,7 +259,6 @@ exports.retrieveNotes = (clientId) => {
                         return
                     }
                     console.log(funcname + "Notes retrieved successfully for clientId" + clientId)
-                    console.log(rows)
                     resolve(rows)
                     return
                 })

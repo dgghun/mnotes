@@ -10,6 +10,7 @@ const { data } = require("jquery")
 
 const app_name = "mnotes" 
 const fname = "-->notes_controller.js:"    // file name for logging
+const NOTEADDED = "noteAdded"
 
  /**EXPORT FUNCTIONS */
 
@@ -30,7 +31,7 @@ exports.createNewNote = (req, res, next) => {
       req.body = {
          userid: clientid,
          doAlert: true,
-         pugMsg: 'noteAdded',
+         pugMsg: NOTEADDED,
          alertMsg: 'Note Added Successfully!'
       }
       this.viewClient(req, res, next)
@@ -207,11 +208,11 @@ exports.editClient = (req, res, next) => {
  */
 exports.viewClient = (req, res, next) => {
    var funcname = "viewClient():"
-   var userid = req.body.userid
-   console.log(fname + funcname + "Userid = " + userid)
+   var clientid = req.body.userid
+   console.log(fname + funcname + "Client id = " + clientid)
    
 
-   database.retrieveClient(userid)
+   database.retrieveClient(clientid)
    .then(client =>{      
       
       if(client){
@@ -234,15 +235,25 @@ exports.viewClient = (req, res, next) => {
             obj.doAlert = false;                // preset to no alert
          }
 
-         var str = JSON.stringify(obj);
-         res.render('clientHome',JSON.parse(str))
+         
+         //Get client notes
+         console.log(fname + funcname + "getting notes for client id:" + clientid)
+         database.retrieveNotes(clientid).then(notes =>{
+            obj.notes = notes
+            console.log(obj.notes)
+
+            var str = JSON.stringify(obj);
+            res.render('clientHome',JSON.parse(str))
+         })
+
+
          
       }
       else{
-         console.log(fname + funcname + " Userid " + userid + " not found.")
+         console.log(fname + funcname + " Userid " + clientid + " not found.")
          req.body = {
             message: 'clientNotFoundById',
-            clientId: userid,
+            clientId: clientid,
             errormessage: 'clientNotFoundById'
          }   
          landing.get_userHome(req, res, next)
@@ -252,7 +263,7 @@ exports.viewClient = (req, res, next) => {
       console.log(fname + "retrieveClient():" + err)
       req.body = {
          message: 'clientNotFoundById',
-         clientId: userid,
+         clientId: clientid,
          errormessage: err.message
       }
       landing.get_userHome(req, res, next)
