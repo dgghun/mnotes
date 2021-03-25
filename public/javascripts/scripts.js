@@ -166,6 +166,12 @@ function addSelectizeInput(tagid, opts) {
 }
  
 
+function formatDate(tagid, dateTime, dateTimeFormat){
+    $(document).ready(function() {
+        document.getElementById(tagid).innerText = moment(dateTime).format(dateTimeFormat)
+    })
+}
+
 /**
  * Add client info to client form
  * @param {JSON} client - client JSON string

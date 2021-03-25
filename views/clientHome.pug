@@ -48,17 +48,28 @@ block content
         include clientForm
 
       //- client notes
+      - var noteCnt = 0
+      each note in notes
+        - noteCnt = noteCnt + 1
       div(id="divClientNotes").col-5
         h1.lead Notes
-          span.ml-1.badge.badge-pill.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") 0
+          span.ml-1.badge.badge-pill.badge-secondary.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") #{noteCnt}
         hr
-        div.card.my-2.shadow-sm.rounded
-          div.card-body
-              div.row.mb-2
-                div.col-sm-8
-                  p.align-middle.text-muted Client Name
-                div.col-sm-4
+        each note in notes
+          div.card.my-2.shadow-sm.rounded
+            div.card-body
+              div.row
+                div.col
+                  p.align-middle.text-muted.small.mb-0 Created: 
+                    span(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
+              div.row
+                div.col
+                  p.align-middle.text-muted.small Session Date: 
+                    span(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
+              div.row
+                div.col
                   a.btn.btn-primary.btn-sm.px-0.btn-block(type='button' role='button' href='#') View
+
   
 
 append foot
@@ -71,5 +82,11 @@ append foot
     //- load client form and disable input
     var clientStr = !{JSON.stringify(client)}
     var notes = !{JSON.stringify(notes)}
-    console.log(notes)
     addClientToForm(clientStr, true)  
+
+
+    //- format note date
+    notes.forEach(function(note){
+      formatDate('noteCreatedDate' + note.id, note.dt_created, 'MM/DD/YY, @ h:mm a')
+      formatDate('noteSessionDate' + note.id, note.date, 'MM/DD/YY')
+    })
