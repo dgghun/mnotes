@@ -115,3 +115,8 @@ body {
 .hide {
   display: none;
 }
+
+.dets>div:nth-child(even){
+  background:rgb(245, 245, 245);
+}
+  
