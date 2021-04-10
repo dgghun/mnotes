@@ -78,7 +78,7 @@ block content
             tbody
               each note in notes
                 tr
-                  th.text-center(scope="row") #{note.id}
+                  td.text-center(scope="row") #{note.id}
                   td.text-center(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
                   td.text-center(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
                   td 
@@ -121,7 +121,6 @@ append foot
       $('[data-toggle="tooltip"]').tooltip()
     })
 
-    //- $('#notesTable').DataTable();
 
     //- load client form and disable input
     var clientStr = !{JSON.stringify(client)}
@@ -134,3 +133,5 @@ append foot
       formatDate('noteCreatedDate' + note.id, note.dt_created, 'ddd, MM/DD/YYYY')
       formatDate('noteSessionDate' + note.id, note.date, 'ddd, MM/DD/YYYY')
     })
+
+    $('#notesTable').DataTable();
