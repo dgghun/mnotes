@@ -52,10 +52,10 @@ block content
       each note in notes
         - noteCnt = noteCnt + 1
       div(id="divClientNotes").col-5
-        div.card.my-2.shadow-sm.rounded.bg-info.text-white
+        div.card.my-2.shadow-sm.rounded.bg-dark.text-white
           div.card-body.py-2
             h1.lead Notes
-              span.ml-1.badge.badge-pill.badge-light.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") #{noteCnt}
+              span.ml-2.badge.badge-pill.badge-light.lead(id='badgeNoteCount' data-toggle="tooltip" data-placement="top" title="Note count") #{noteCnt}
         
         //- Note search input
         div.input-group
@@ -67,30 +67,50 @@ block content
         //- Sort buttons
 
         //- Note list
-        each note in notes
-          div.card.my-2.shadow-sm.rounded
-            div.card-body.py-2
-              div.row
-                div.col
-                  p.text-muted.small Note ID: #{note.id} 
-              div.row
-                div.col-1
-                  i.fa.fa-calendar
-                div.col
-                  p.text-muted Created: 
-                    span(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
-                div.col-3
-                  a.btn.btn-outline-info.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="View note")
-                    i.fa.fa-eye
-              div.row
-                div.col-1
-                  i.fa.fa-calendar
-                div.col
-                  p.text-muted Session: 
-                    span(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
-                div.col-3
-                  a.btn.btn-outline-secondary.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="Delete note")
-                    i.fa.fa-trash
+        div(style="height: 500px; overflow: auto;")
+          table.table.table-striped(id="notesTable" name="notesTable") 
+            thead
+              tr
+                th.text-center(scope="col") ID
+                th.text-center(scope="col") Created
+                th.text-center(scope="col") Session
+                th(scope="col") Actions
+            tbody
+              each note in notes
+                tr
+                  th.text-center(scope="row") #{note.id}
+                  td.text-center(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
+                  td.text-center(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
+                  td 
+                    a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="View note")
+                      i.fa.fa-eye
+                    a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="Delete note")
+                      i.fa.fa-trash
+
+        //- each note in notes
+          //- div.card.my-2.shadow-sm.rounded
+          //-   div.card-body.py-2
+          //-     div.row
+          //-       div.col
+          //-         p.text-muted.small Note ID: #{note.id} 
+          //-     div.row
+          //-       div.col-1
+          //-         i.fa.fa-calendar
+          //-       div.col
+          //-         p.text-muted Created: 
+          //-           span(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
+          //-       div.col-3
+          //-         a.btn.btn-outline-info.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="View note")
+          //-           i.fa.fa-eye
+          //-     div.row
+          //-       div.col-1
+          //-         i.fa.fa-calendar
+          //-       div.col
+          //-         p.text-muted Session: 
+          //-           span(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
+          //-       div.col-3
+          //-         a.btn.btn-outline-secondary.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="Delete note")
+          //-           i.fa.fa-trash
               
   
 
@@ -100,7 +120,9 @@ append foot
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
-    
+
+    $('#notesTable').DataTable();
+
     //- load client form and disable input
     var clientStr = !{JSON.stringify(client)}
     var notes = !{JSON.stringify(notes)}
@@ -109,6 +131,6 @@ append foot
 
     //- format note date
     notes.forEach(function(note){
-      formatDate('noteCreatedDate' + note.id, note.dt_created, 'ddd, MMM Do YYYY')
-      formatDate('noteSessionDate' + note.id, note.date, 'ddd, MMM Do YYYY')
+      formatDate('noteCreatedDate' + note.id, note.dt_created, 'ddd, MM/DD/YYYY')
+      formatDate('noteSessionDate' + note.id, note.date, 'ddd, MM/DD/YYYY')
     })
