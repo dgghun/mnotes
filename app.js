@@ -47,6 +47,7 @@ app.use('/css', express.static(path.join(__dirname, 'node_modules/selectize-boot
 app.use('/js', express.static(path.join(__dirname, 'node_modules/datatables.net/js')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/datatables.net-dt/js')))
 app.use('/css', express.static(path.join(__dirname, 'node_modules/datatables.net-dt/css')))
+app.use('/images', express.static(path.join(__dirname, 'node_modules/datatables.net-dt/images')))
 app.use('/images', express.static(path.join(__dirname, 'public/images')))
 
 

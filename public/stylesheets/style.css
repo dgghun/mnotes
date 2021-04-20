@@ -120,3 +120,6 @@ body {
   background:rgb(245, 245, 245);
 }
   
+.pull-left{float:left!important;}
+.pull-right{float:right!important;}
+

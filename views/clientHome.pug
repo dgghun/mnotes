@@ -62,7 +62,7 @@ block content
             div.input-group-prepend
               div.input-group-text 
                 i.fa.fa-search
-            input.form-control(id="inputNoteSearch" type="text" placeholder="Search Notes..." onkeyup="")
+            input.form-control(id="inputNoteSearch" name="inputNoteSearch" type="text" placeholder="Search Notes...")
 
         //- Sort buttons
 
@@ -74,14 +74,14 @@ block content
                 th.text-center(scope="col") ID
                 th.text-center(scope="col") Created
                 th.text-center(scope="col") Session
-                th(scope="col") Actions
+                th.text-center(scope="col") Actions
             tbody
               each note in notes
                 tr
                   td.text-center(scope="row") #{note.id}
                   td.text-center(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
                   td.text-center(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
-                  td 
+                  td.text-center 
                     a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="View note")
                       i.fa.fa-eye
                     a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="Delete note")
@@ -118,7 +118,9 @@ append foot
   script.
     //- enable bootstrap tooltips (Enable tooltips everywhere)
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]').tooltip({
+            trigger : 'hover'
+      })
     })
 
 
@@ -134,4 +136,14 @@ append foot
       formatDate('noteSessionDate' + note.id, note.date, 'ddd, MM/DD/YYYY')
     })
 
-    $('#notesTable').DataTable();
+    $('#notesTable').DataTable({
+      "order": [[ 1, "desc" ]],
+      "paging" : false,
+      "dom": 't'
+    });
+    
+    var oTable = $('#notesTable').DataTable();  
+    $('#inputNoteSearch').keyup(function(){
+      oTable.search($(this).val()).draw() ;
+    })
+
