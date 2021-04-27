@@ -142,8 +142,22 @@ append foot
       "dom": 't'
     });
     
-    var oTable = $('#notesTable').DataTable();  
-    $('#inputNoteSearch').keyup(function(){
-      oTable.search($(this).val()).draw() ;
+    //- Note search box logic
+    var inNoteSearch = document.getElementById('inputNoteSearch').value.toUpperCase()
+    var noteIds = getElementsById(/^note(Session|Created)Date/);
+    var toHide = ''
+    Array.from(noteIds, tagId =>{
+      createdTag = document.getElementById(tagId)
+      createdText = createdTag.textContent.toUpperCase() || createdTag.innerText.toUpperCase()
+      
+      console.log(tagId +' ' + createdText)
+      
+      
     })
+
+    //- var oTable = $('#notesTable').DataTable();  
+    //- $('#inputNoteSearch').keyup(function(){
+    //-   oTable.search($(this).val()).draw() ;
+    //- })
+    
 

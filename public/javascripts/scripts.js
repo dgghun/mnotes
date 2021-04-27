@@ -330,6 +330,26 @@ function viewClient(userid){
     $(".alert").fadeTo(100,1).delay(2000).fadeTo(500,0).slideUp(500)
 }
 
+// Gets elements by ID means of a regular expression
+function getElementsById(regex) {
+    var tags = document.getElementsByTagName('*'),
+        tagsLength = tags.length,
+        matches = [],
+        index,
+        tag;
+
+    for (index = 0; index < tagsLength; index += 1) {
+        tag = tags[index];
+        if (regex.test(tag.id)) {
+            matches.push(tag.id);
+        }
+    }
+
+    return matches;
+}
+
+
+
 //Need this???
 // function checkSpecialCharacters(arrayToCheck){
 //     arrayToCheck.forEach(element => {
