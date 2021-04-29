@@ -330,6 +330,36 @@ function viewClient(userid){
     $(".alert").fadeTo(100,1).delay(2000).fadeTo(500,0).slideUp(500)
 }
 
+/**
+ * Set input search box to show or hide an array of tag ids of the clientHome notes section
+ */
+function setClientHomeNoteSearchBox(){
+    var tagHandle = ''
+    var tagNumber
+    var noteCreatedText
+    var noteSessionText
+    var tagIdsToHide = getElementsById(/^note(Session|Created)Date/);
+
+    var input = document.getElementById('inputNoteSearch').value.toUpperCase()  // input search box current string
+    Array.from(tagIdsToHide, tagId =>{
+      tagNumber = tagId.substring(tagId.search(/[0-9]/), tagId.length)
+      
+      tagHandle = document.getElementById('noteCreatedDate' + tagNumber)
+      noteCreatedText = tagHandle.textContent.toUpperCase() || tagHandle.innerText.toUpperCase()
+      
+      tagHandle = document.getElementById('noteSessionDate' + tagNumber)
+      noteSessionText = tagHandle.textContent.toUpperCase() || tagHandle.innerText.toUpperCase()
+
+      // Find a string match 
+      if((noteCreatedText.indexOf(input) > -1) || (noteSessionText.indexOf(input) > -1)){
+          document.getElementById('noteRow' + tagNumber).style.display = '' //found a match, show it
+        }
+        else{
+            document.getElementById('noteRow' + tagNumber).style.display = 'none' //no match, hide it
+      }
+    })
+}
+
 // Gets elements by ID means of a regular expression
 function getElementsById(regex) {
     var tags = document.getElementsByTagName('*'),
