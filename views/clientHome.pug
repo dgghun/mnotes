@@ -82,37 +82,10 @@ block content
                   td.text-center(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
                   td.text-center(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
                   td.text-center 
-                    a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="View note")
+                    a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href='/viewNote*?clientId=' + client.id + '&noteId=' + note.id + '' data-toggle="tooltip" data-placement="top" title="View note")
                       i.fa.fa-eye
-                    a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href='#' data-toggle="tooltip" data-placement="top" title="Delete note")
-                      i.fa.fa-trash
-
-        //- each note in notes
-          //- div.card.my-2.shadow-sm.rounded
-          //-   div.card-body.py-2
-          //-     div.row
-          //-       div.col
-          //-         p.text-muted.small Note ID: #{note.id} 
-          //-     div.row
-          //-       div.col-1
-          //-         i.fa.fa-calendar
-          //-       div.col
-          //-         p.text-muted Created: 
-          //-           span(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
-          //-       div.col-3
-          //-         a.btn.btn-outline-info.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="View note")
-          //-           i.fa.fa-eye
-          //-     div.row
-          //-       div.col-1
-          //-         i.fa.fa-calendar
-          //-       div.col
-          //-         p.text-muted Session: 
-          //-           span(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
-          //-       div.col-3
-          //-         a.btn.btn-outline-secondary.btn-sm.btn-block(type='button' role='button' href='#' data-toggle="tooltip" data-placement="right" title="Delete note")
-          //-           i.fa.fa-trash
-              
-  
+                    a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href='/viewNote' data-toggle="tooltip" data-placement="top" title="Delete note")
+                      i.fa.fa-trash              
 
 append foot
   script.
@@ -147,11 +120,5 @@ append foot
       setClientHomeNoteSearchBox()
     })
     
-    
 
-    //- var oTable = $('#notesTable').DataTable();  
-    //- $('#inputNoteSearch').keyup(function(){
-    //-   oTable.search($(this).val()).draw() ;
-    //- })
-    
 

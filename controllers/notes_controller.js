@@ -50,6 +50,23 @@ exports.createNewNote = (req, res, next) => {
    
 }
 
+/**
+ * View a Client note
+ * @param {*} req -  GET request 
+ * @param {*} res 
+ * @param {*} next 
+ */
+exports.viewNote = (req, res, next) =>{
+   var funcname = fname + 'viewNote():'
+   var noteId = req.query.noteId          //GET request query
+   var clientId = req.query.clientId      //GET request query
+   console.log(funcname + "noteId: " + noteId + ', clientId: ' + clientId)
+
+   //FOR TESTING
+   req.body = {userid: clientId}
+   this.viewClient(req, res, next)
+}
+
 
 /**
  * Load new note page
@@ -240,7 +257,6 @@ exports.viewClient = (req, res, next) => {
          console.log(fname + funcname + "getting notes for client id:" + clientid)
          database.retrieveNotes(clientid).then(notes =>{
             obj.notes = notes
-            console.log(obj.notes)
 
             var str = JSON.stringify(obj);
             res.render('clientHome',JSON.parse(str))
