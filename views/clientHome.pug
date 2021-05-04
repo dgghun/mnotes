@@ -82,9 +82,11 @@ block content
                   td.text-center(id="noteCreatedDate" + note.id name="noteCreatedDate") #{note.dt_created}
                   td.text-center(id="noteSessionDate" + note.id name="noteSessionDate") #{note.date}
                   td.text-center 
-                    a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href='/viewNote*?clientId=' + client.id + '&noteId=' + note.id + '' data-toggle="tooltip" data-placement="top" title="View note")
+                    - var viewNoteHref = '/viewNote*?clientId=' + client.id + '&noteId=' + note.id
+                    - var deleteNoteHref = '/deleteNote*?clientId=' + client.id + '&noteId=' + note.id
+                    a.btn.btn-outline-info.btn-sm.mr-1(type='button' role='button' href= viewNoteHref data-toggle="tooltip" data-placement="top" title="View note")
                       i.fa.fa-eye
-                    a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href='/viewNote' data-toggle="tooltip" data-placement="top" title="Delete note")
+                    a.btn.btn-outline-secondary.btn-sm(type='button' role='button' href= deleteNoteHref data-toggle="tooltip" data-placement="top" title="Delete note")
                       i.fa.fa-trash              
 
 append foot
