@@ -160,6 +160,44 @@ exports.updateClient = (client) => {
     })
 }
 
+/**
+ * 
+ * @param {*} noteId - The note ID of the note to retrieve
+ */
+exports.retrieveNote = (noteId) =>{
+    var funcname = fname + "retrieveNote():"
+    console.log(funcname + "Getting note with ID = " + noteId)
+    const querystr = "SELECT * FROM " + NOTE_TABLE + " WHERE id = ?"
+
+    return new Promise((resolve, reject) => {
+        this.getDAO().then(db =>{
+            //Do sequentially
+            db.serialize(function (){
+                db.get(querystr, noteId, (err, row) =>{
+                    if(err){
+                        console.log(funcname + err.message)
+                        console.log(funcname + err)
+                        reject(err)
+                        return
+                    }
+
+                    if(row)
+                        console.log(funcname + "retrieved noteId " + noteId + " succesfully")
+                    else
+                        console.log(funcname + "noteId " + noteId + " not found")
+
+                    resolve(row)
+                    return
+                })
+                closeDAO(db);
+            })
+        }).catch(err => {
+            console.error(err)
+            console.error(err.message)
+            return err
+        })
+    })
+}
 
 /**
  * Retrieves a single Client by id
