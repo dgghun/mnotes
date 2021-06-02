@@ -161,7 +161,7 @@ exports.updateClient = (client) => {
 }
 
 /**
- * 
+ * Retrieve a single note
  * @param {*} noteId - The note ID of the note to retrieve
  */
 exports.retrieveNote = (noteId) =>{

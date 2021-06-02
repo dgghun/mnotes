@@ -241,7 +241,7 @@ function checkPhone(tagId) {
             var tmp = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6, 10)
             phone = tmp
         }
-        console.log(phone)
+        
         document.getElementById(tagId).value = phone
     })
 }
@@ -326,7 +326,6 @@ function sortByDateTime(tagName, ascending){
 }
 
 function viewClient(userid){
-    console.log(userid)
     $(".alert").fadeTo(100,1).delay(2000).fadeTo(500,0).slideUp(500)
 }
 

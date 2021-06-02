@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  
+  //- sidebar.pug
+  include sidebar
+  
+  //- Body
+  div.container.w3-animate-opacity
+
+    //- Check for alerts
+    if doAlert
+      include alert
+
+    div.row
+      div.col-9
+        h1.display-3.tocapitalize= message

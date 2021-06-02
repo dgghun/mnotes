@@ -61,10 +61,35 @@ exports.viewNote = (req, res, next) =>{
    var noteId = req.query.noteId          //GET request query
    var clientId = req.query.clientId      //GET request query
    console.log(funcname + "noteId: " + noteId + ', clientId: ' + clientId)
+   
+   database.retrieveNote(noteId)
+   .then(note => {
+      if(note){
+         console.log(funcname + 'Retrieve noteId: ' + noteId + 'succesfully')
 
-   //FOR TESTING
-   req.body = {userid: clientId}
-   this.viewClient(req, res, next)
+         var obj = new Object()
+         obj.noteId = noteId
+         obj.clientId = clientId
+         obj.message = 'Viewing Note ID ' + noteId + ', Client ID ' + clientId
+         obj.note = note
+         
+         var str = JSON.stringify(obj)
+         res.render('editNote', JSON.parse(str))
+                  
+      }else{
+         console.log(funcname + "noteId: " + noteId + ', clientId: ' + clientId + ' NOT FOUND.')
+         req.body = {
+            userid: clientId,
+            doAlert: true,
+            pugMsg: 'noteNotFoundById',
+            alertMsg: 'Note not found: (note id:' + noteId + ')',
+            errorMsg: ''
+         }
+         
+         this.viewClient(req, res, next)
+      }
+   })
+
 }
 
 
